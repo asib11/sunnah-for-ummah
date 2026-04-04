@@ -7,6 +7,12 @@ const taglines = [
   "Follow The Path Of The Prophet ﷺ",
 ];
 
+const headlines = [
+  { before: "Follow the Sunnah, ", highlight: "Elevate", after: " Your Style" },
+  { before: "Dress with ", highlight: "Purpose", after: " & Faith" },
+  { before: "Embrace the ", highlight: "Sunnah", after: " Lifestyle" },
+];
+
 const useTypingText = (words: string[], typingSpeed = 80, deleteSpeed = 40, pauseMs = 1500) => {
   const [text, setText] = useState("");
   const idx = useRef(0);
@@ -44,8 +50,20 @@ const useTypingText = (words: string[], typingSpeed = 80, deleteSpeed = 40, paus
   return text;
 };
 
+const useHeadlineRotation = (items: typeof headlines, intervalMs = 4000) => {
+  const [index, setIndex] = useState(0);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((i) => (i + 1) % items.length);
+    }, intervalMs);
+    return () => clearInterval(timer);
+  }, [items, intervalMs]);
+  return items[index];
+};
+
 const HeroBanner = () => {
   const typingText = useTypingText(taglines);
+  const headline = useHeadlineRotation(headlines);
   return (
     <section className="relative w-full overflow-hidden">
       <div className="relative">
@@ -63,9 +81,10 @@ const HeroBanner = () => {
               <p className="text-primary-foreground/80 text-xs md:text-sm uppercase tracking-[0.3em] font-body mb-2 min-h-[1.5em]">
                 {typingText || "\u00A0"}
               </p>
-              <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-tight mb-4">
-                Follow the Sunnah,{" "}
-                <span className="text-gold">Elevate</span> Your Style
+              <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-tight mb-4 min-h-[4.5rem] md:min-h-[7rem] lg:min-h-[9rem]">
+                {headline.before}
+                <span className="text-gold">{headline.highlight}</span>
+                {headline.after}
               </h2>
               <button className="bg-primary text-primary-foreground px-6 py-3 rounded-full text-sm font-body font-semibold hover:bg-emerald-light transition-colors">
                 Shop Now
