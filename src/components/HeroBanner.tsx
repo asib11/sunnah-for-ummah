@@ -7,6 +7,12 @@ const taglines = [
   "Follow The Path Of The Prophet ﷺ",
 ];
 
+const headlines = [
+  { before: "Follow the Sunnah, ", highlight: "Elevate", after: " Your Style" },
+  { before: "Dress with ", highlight: "Purpose", after: " & Faith" },
+  { before: "Embrace the ", highlight: "Sunnah", after: " Lifestyle" },
+];
+
 const useTypingText = (words: string[], typingSpeed = 80, deleteSpeed = 40, pauseMs = 1500) => {
   const [text, setText] = useState("");
   const idx = useRef(0);
