@@ -50,8 +50,20 @@ const useTypingText = (words: string[], typingSpeed = 80, deleteSpeed = 40, paus
   return text;
 };
 
+const useHeadlineRotation = (items: typeof headlines, intervalMs = 4000) => {
+  const [index, setIndex] = useState(0);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((i) => (i + 1) % items.length);
+    }, intervalMs);
+    return () => clearInterval(timer);
+  }, [items, intervalMs]);
+  return items[index];
+};
+
 const HeroBanner = () => {
   const typingText = useTypingText(taglines);
+  const headline = useHeadlineRotation(headlines);
   return (
     <section className="relative w-full overflow-hidden">
       <div className="relative">
