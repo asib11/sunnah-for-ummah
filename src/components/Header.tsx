@@ -74,7 +74,7 @@ const Header = () => {
           <Search className="w-4 h-4 text-muted-foreground" />
           <input
             type="text"
-            placeholder="Search"
+            placeholder={typingText || "Search"}
             className="bg-transparent outline-none text-sm text-foreground placeholder:text-muted-foreground w-full font-body"
           />
         </div>
