@@ -1,5 +1,16 @@
 import { Search, ShoppingCart, Heart, User, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+
+const searchProducts = [
+  "Premium Black Embroidered Panjabi",
+  "Classic White Thobe",
+  "Dawah T-Shirt",
+  "Navy Blue Embroidered Panjabi",
+  "Premium Attar Perfume Oil Set",
+  "Beige Cotton Panjabi",
+  "Olive Green Chino Pants",
+  "Solid Premium T-Shirt",
+];
 
 const navItems = [
   { label: "Eid Collection", href: "#" },
@@ -9,8 +20,50 @@ const navItems = [
   { label: "Perfume Oil (Attar)", href: "#" },
 ];
 
+const useTypingPlaceholder = (words: string[], typingSpeed = 80, deleteSpeed = 40, pauseMs = 1500) => {
+  const [text, setText] = useState("");
+  const idx = useRef(0);
+  const charIdx = useRef(0);
+  const deleting = useRef(false);
+
+  useEffect(() => {
+    const tick = () => {
+      const current = words[idx.current];
+      if (!deleting.current) {
+        charIdx.current++;
+        setText(current.slice(0, charIdx.current));
+        if (charIdx.current === current.length) {
+          deleting.current = true;
+          return pauseMs;
+        }
+        return typingSpeed;
+      } else {
+        charIdx.current--;
+        setText(current.slice(0, charIdx.current));
+        if (charIdx.current === 0) {
+          deleting.current = false;
+          idx.current = (idx.current + 1) % words.length;
+          return typingSpeed;
+        }
+        return deleteSpeed;
+      }
+    };
+
+    let timer: ReturnType<typeof setTimeout>;
+    const loop = () => {
+      const delay = tick();
+      timer = setTimeout(loop, delay);
+    };
+    timer = setTimeout(loop, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [words, typingSpeed, deleteSpeed, pauseMs]);
+
+  return text;
+};
+
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const typingText = useTypingPlaceholder(searchProducts);
 
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
@@ -21,7 +74,7 @@ const Header = () => {
           <Search className="w-4 h-4 text-muted-foreground" />
           <input
             type="text"
-            placeholder="Search"
+            placeholder={typingText || "Search"}
             className="bg-transparent outline-none text-sm text-foreground placeholder:text-muted-foreground w-full font-body"
           />
         </div>
@@ -86,7 +139,7 @@ const Header = () => {
               <Search className="w-4 h-4 text-muted-foreground" />
               <input
                 type="text"
-                placeholder="Search"
+                placeholder={typingText || "Search"}
                 className="bg-transparent outline-none text-sm text-foreground placeholder:text-muted-foreground w-full font-body"
               />
             </div>
