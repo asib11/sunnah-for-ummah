@@ -81,9 +81,10 @@ const HeroBanner = () => {
               <p className="text-primary-foreground/80 text-xs md:text-sm uppercase tracking-[0.3em] font-body mb-2 min-h-[1.5em]">
                 {typingText || "\u00A0"}
               </p>
-              <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-tight mb-4">
-                Follow the Sunnah,{" "}
-                <span className="text-gold">Elevate</span> Your Style
+              <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-tight mb-4 min-h-[4.5rem] md:min-h-[7rem] lg:min-h-[9rem]">
+                {headline.before}
+                <span className="text-gold">{headline.highlight}</span>
+                {headline.after}
               </h2>
               <button className="bg-primary text-primary-foreground px-6 py-3 rounded-full text-sm font-body font-semibold hover:bg-emerald-light transition-colors">
                 Shop Now
