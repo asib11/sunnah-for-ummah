@@ -1,5 +1,17 @@
-import heroBanner from "@/assets/hero-banner.jpg";
 import { useState, useEffect, useRef } from "react";
+import heroMasjidHaram from "@/assets/hero-masjid-haram.jpg";
+import heroMasjidNabawi from "@/assets/hero-masjid-nabawi.jpg";
+import heroAlAqsa from "@/assets/hero-al-aqsa.jpg";
+import heroBlueMosque from "@/assets/hero-blue-mosque.jpg";
+import heroSheikhZayed from "@/assets/hero-sheikh-zayed.jpg";
+
+const heroImages = [
+  heroMasjidHaram,
+  heroMasjidNabawi,
+  heroAlAqsa,
+  heroBlueMosque,
+  heroSheikhZayed,
+];
 
 const taglines = [
   "Sunnah Is The Best Lifestyle",
@@ -61,19 +73,40 @@ const useHeadlineRotation = (items: typeof headlines, intervalMs = 4000) => {
   return items[index];
 };
 
+const useImageRotation = (images: string[], intervalMs = 5000) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((i) => (i + 1) % images.length);
+    }, intervalMs);
+    return () => clearInterval(timer);
+  }, [images, intervalMs]);
+  return currentIndex;
+};
+
 const HeroBanner = () => {
   const typingText = useTypingText(taglines);
   const headline = useHeadlineRotation(headlines);
+  const currentImageIndex = useImageRotation(heroImages, 5000);
+
   return (
     <section className="relative w-full overflow-hidden">
       <div className="relative">
-        <img
-          src={heroBanner}
-          alt="Sunnah for Ummah - Islamic Clothing Collection"
-          width={1920}
-          height={800}
-          className="w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] object-cover"
-        />
+        {/* Stacked images with crossfade */}
+        <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px]">
+          {heroImages.map((src, i) => (
+            <img
+              key={i}
+              src={src}
+              alt="Islamic Holy Place"
+              width={1920}
+              height={800}
+              className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out"
+              style={{ opacity: i === currentImageIndex ? 1 : 0 }}
+              {...(i !== 0 ? { loading: "lazy" as const } : {})}
+            />
+          ))}
+        </div>
         <div className="absolute inset-0 bg-gradient-to-r from-foreground/40 to-transparent" />
         <div className="absolute inset-0 flex items-center">
           <div className="container mx-auto px-4">
