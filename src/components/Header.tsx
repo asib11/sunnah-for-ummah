@@ -1,5 +1,16 @@
 import { Search, ShoppingCart, Heart, User, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+
+const searchProducts = [
+  "Premium Black Embroidered Panjabi",
+  "Classic White Thobe",
+  "Dawah T-Shirt",
+  "Navy Blue Embroidered Panjabi",
+  "Premium Attar Perfume Oil Set",
+  "Beige Cotton Panjabi",
+  "Olive Green Chino Pants",
+  "Solid Premium T-Shirt",
+];
 
 const navItems = [
   { label: "Eid Collection", href: "#" },
