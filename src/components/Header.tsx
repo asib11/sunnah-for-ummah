@@ -32,7 +32,7 @@ const Header = () => {
             Sunnah for Ummah
           </h1>
           <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-body font-semibold">
-            Sunnah Is The Best Lifestyle Was Created By The Best Men Ever Lived On Earth
+            SUNNAH: THE LEGACY OF THE BEST.
           </span>
         </div>
 
