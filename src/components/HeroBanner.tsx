@@ -1,6 +1,51 @@
 import heroBanner from "@/assets/hero-banner.jpg";
+import { useState, useEffect, useRef } from "react";
+
+const taglines = [
+  "Sunnah Is The Best Lifestyle",
+  "Created By The Best Men Ever Lived On Earth",
+  "Follow The Path Of The Prophet ﷺ",
+];
+
+const useTypingText = (words: string[], typingSpeed = 80, deleteSpeed = 40, pauseMs = 1500) => {
+  const [text, setText] = useState("");
+  const idx = useRef(0);
+  const charIdx = useRef(0);
+  const deleting = useRef(false);
+
+  useEffect(() => {
+    const tick = () => {
+      const current = words[idx.current];
+      if (!deleting.current) {
+        charIdx.current++;
+        setText(current.slice(0, charIdx.current));
+        if (charIdx.current === current.length) {
+          deleting.current = true;
+          return pauseMs;
+        }
+        return typingSpeed;
+      } else {
+        charIdx.current--;
+        setText(current.slice(0, charIdx.current));
+        if (charIdx.current === 0) {
+          deleting.current = false;
+          idx.current = (idx.current + 1) % words.length;
+          return typingSpeed;
+        }
+        return deleteSpeed;
+      }
+    };
+    let timer: ReturnType<typeof setTimeout>;
+    const loop = () => { const delay = tick(); timer = setTimeout(loop, delay); };
+    timer = setTimeout(loop, typingSpeed);
+    return () => clearTimeout(timer);
+  }, [words, typingSpeed, deleteSpeed, pauseMs]);
+
+  return text;
+};
 
 const HeroBanner = () => {
+  const typingText = useTypingText(taglines);
   return (
     <section className="relative w-full overflow-hidden">
       <div className="relative">
