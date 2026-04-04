@@ -60,8 +60,8 @@ const HeroBanner = () => {
         <div className="absolute inset-0 flex items-center">
           <div className="container mx-auto px-4">
             <div className="max-w-lg">
-              <p className="text-primary-foreground/80 text-xs md:text-sm uppercase tracking-[0.3em] font-body mb-2">
-                Sunnah Is The Best Lifestyle Was Created By The Best Men Ever Lived On Earth
+              <p className="text-primary-foreground/80 text-xs md:text-sm uppercase tracking-[0.3em] font-body mb-2 min-h-[1.5em]">
+                {typingText || "\u00A0"}
               </p>
               <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-tight mb-4">
                 Follow the Sunnah,{" "}
