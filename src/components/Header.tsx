@@ -31,7 +31,7 @@ const Header = () => {
           <h1 className="font-display text-xl md:text-2xl font-bold text-primary tracking-wide">
             Sunnah for Ummah
           </h1>
-          <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-body font-semibold">
+          <span className="uppercase tracking-[0.3em] font-body text-xs font-bold text-emerald-400">
             SUNNAH: THE LEGACY OF THE BEST.
           </span>
         </div>
