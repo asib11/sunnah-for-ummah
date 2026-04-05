@@ -42,6 +42,7 @@ const CategoryGrid = () => {
               "lg:col-span-4 lg:row-span-1", // Medium wide
               "lg:col-span-3 lg:row-span-1", // Medium
               "lg:col-span-3 lg:row-span-2", // Tall
+              "lg:col-span-4 lg:row-span-2", // Women's - tall
               "lg:col-span-5 lg:row-span-1", // Wide
               "lg:col-span-4 lg:row-span-1", // Medium wide
             ];
