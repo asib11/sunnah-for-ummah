@@ -64,7 +64,7 @@ const NewArrivals = () => {
         </a>
       </div>
       <div
-        className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 transition-opacity duration-400 ${fading ? "opacity-0" : "opacity-100"}`}
+        className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"
       >
         {displayProducts.map((product, i) => (
           <ProductCard key={product.name} {...product} />
