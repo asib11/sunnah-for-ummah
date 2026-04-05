@@ -38,13 +38,13 @@ const CategoryGrid = () => {
           {categories.map((cat, index) => {
             // Unique span patterns for visual interest
             const spanClasses = [
-              "lg:col-span-5 lg:row-span-2", // Large feature
-              "lg:col-span-4 lg:row-span-1", // Medium wide
-              "lg:col-span-3 lg:row-span-1", // Medium
-              "lg:col-span-3 lg:row-span-2", // Tall
+              "lg:col-span-4 lg:row-span-1", // Premium Panjabi - smaller
+              "lg:col-span-4 lg:row-span-1", // Thobe
+              "lg:col-span-4 lg:row-span-1", // Dawah T-Shirt
+              "lg:col-span-3 lg:row-span-2", // Kifaya - tall
               "lg:col-span-4 lg:row-span-2", // Women's - tall
-              "lg:col-span-5 lg:row-span-1", // Wide
-              "lg:col-span-4 lg:row-span-1", // Medium wide
+              "lg:col-span-5 lg:row-span-1", // Attar - wide
+              "lg:col-span-5 lg:row-span-1", // Accessories
             ];
 
             const isHovered = hoveredIndex === index;
