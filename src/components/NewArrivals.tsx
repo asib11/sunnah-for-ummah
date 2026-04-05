@@ -1,3 +1,4 @@
+import { useState, useEffect, useCallback } from "react";
 import ProductCard from "./ProductCard";
 import product1 from "@/assets/product-1.jpg";
 import product2 from "@/assets/product-2.jpg";
@@ -9,17 +10,42 @@ import product7 from "@/assets/product-7.jpg";
 import product8 from "@/assets/product-8.jpg";
 
 const products = [
-  { name: "Premium Black Embroidered Panjabi", price: 2490, image: product1, badge: "New" },
+  { name: "Premium Black Embroidered Panjabi", price: 2490, image: product1, badge: "New" as const },
   { name: "Classic White Thobe - Premium Cotton", price: 1990, image: product2 },
-  { name: "Dawah T-Shirt - Calligraphy Edition", price: 590, image: product3, badge: "New" },
+  { name: "Dawah T-Shirt - Calligraphy Edition", price: 590, image: product3, badge: "New" as const },
   { name: "Navy Blue Embroidered Panjabi", price: 2290, originalPrice: 2790, image: product4 },
-  { name: "Premium Attar Perfume Oil Set", price: 1250, image: product5, badge: "Bestseller" },
+  { name: "Premium Attar Perfume Oil Set", price: 1250, image: product5, badge: "Bestseller" as const },
   { name: "Beige Cotton Panjabi - Classic Fit", price: 1690, originalPrice: 1990, image: product6 },
   { name: "Olive Green Chino Pants", price: 890, image: product7 },
   { name: "Solid Premium T-Shirt - Gray", price: 490, originalPrice: 590, image: product8 },
 ];
 
+function shuffleArray<T>(arr: T[]): T[] {
+  const shuffled = [...arr];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
 const NewArrivals = () => {
+  const [displayProducts, setDisplayProducts] = useState(products);
+  const [fading, setFading] = useState(false);
+
+  const shuffle = useCallback(() => {
+    setFading(true);
+    setTimeout(() => {
+      setDisplayProducts(shuffleArray(products));
+      setFading(false);
+    }, 400);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(shuffle, 5000);
+    return () => clearInterval(interval);
+  }, [shuffle]);
+
   return (
     <section className="container mx-auto px-4 py-12">
       <div className="flex items-center justify-between mb-8">
@@ -33,9 +59,11 @@ const NewArrivals = () => {
           View All
         </a>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-        {products.map((product, i) => (
-          <ProductCard key={i} {...product} />
+      <div
+        className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 transition-opacity duration-400 ${fading ? "opacity-0" : "opacity-100"}`}
+      >
+        {displayProducts.map((product, i) => (
+          <ProductCard key={product.name} {...product} />
         ))}
       </div>
     </section>
