@@ -5,12 +5,14 @@ import catTshirt from "@/assets/cat-tshirt.jpg";
 import catKifaya from "@/assets/cat-kifaya.jpg";
 import catAttar from "@/assets/cat-attar.jpg";
 import catAccessories from "@/assets/cat-accessories.jpg";
+import catWomens from "@/assets/cat-womens.jpg";
 
 const categories = [
   { name: "Premium Panjabi", image: catPanjabi, desc: "Handcrafted elegance" },
   { name: "Thobe", image: catThobe, desc: "Classic & refined" },
   { name: "Dawah T-Shirt", image: catTshirt, desc: "Wear your message" },
   { name: "Kifaya", image: catKifaya, desc: "Traditional headwear" },
+  { name: "Women's Collection", image: catWomens, desc: "Modest & elegant" },
   { name: "Perfume Oil (Attar)", image: catAttar, desc: "Pure fragrances" },
   { name: "Accessories", image: catAccessories, desc: "Complete your look" },
 ];
