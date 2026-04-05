@@ -31,14 +31,18 @@ function shuffleArray<T>(arr: T[]): T[] {
 
 const NewArrivals = () => {
   const [displayProducts, setDisplayProducts] = useState(products);
-  const [fading, setFading] = useState(false);
 
   const shuffle = useCallback(() => {
-    setFading(true);
-    setTimeout(() => {
-      setDisplayProducts(shuffleArray(products));
-      setFading(false);
-    }, 400);
+    setDisplayProducts(prev => {
+      const shuffled = [...prev];
+      // Shuffle only images among the products
+      const images = shuffled.map(p => p.image);
+      for (let i = images.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [images[i], images[j]] = [images[j], images[i]];
+      }
+      return shuffled.map((p, idx) => ({ ...p, image: images[idx] }));
+    });
   }, []);
 
   useEffect(() => {
