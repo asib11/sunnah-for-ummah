@@ -31,14 +31,18 @@ function shuffleArray<T>(arr: T[]): T[] {
 
 const NewArrivals = () => {
   const [displayProducts, setDisplayProducts] = useState(products);
-  const [fading, setFading] = useState(false);
 
   const shuffle = useCallback(() => {
-    setFading(true);
-    setTimeout(() => {
-      setDisplayProducts(shuffleArray(products));
-      setFading(false);
-    }, 400);
+    setDisplayProducts(prev => {
+      const shuffled = [...prev];
+      // Shuffle only images among the products
+      const images = shuffled.map(p => p.image);
+      for (let i = images.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [images[i], images[j]] = [images[j], images[i]];
+      }
+      return shuffled.map((p, idx) => ({ ...p, image: images[idx] }));
+    });
   }, []);
 
   useEffect(() => {
@@ -60,7 +64,7 @@ const NewArrivals = () => {
         </a>
       </div>
       <div
-        className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 transition-opacity duration-400 ${fading ? "opacity-0" : "opacity-100"}`}
+        className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"
       >
         {displayProducts.map((product, i) => (
           <ProductCard key={product.name} {...product} />
