@@ -42,7 +42,7 @@ const NewArrivals = () => {
   }, []);
 
   useEffect(() => {
-    const interval = setInterval(shuffle, 5000);
+    const interval = setInterval(shuffle, 3000);
     return () => clearInterval(interval);
   }, [shuffle]);
 
