@@ -21,7 +21,7 @@ const packages: Package[] = [
   {
     title: "Hajj Package (Men & Women)",
     bangla: "হজ্জ প্যাকেজ (পুরুষ ও মহিলা)",
-    price: 9800,
+    price: 10500,
     oldPrice: 12000,
     badge: "Best Value",
     image: pkgHajjCombo,
