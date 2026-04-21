@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Check } from "lucide-react";
+import { Check, Star, CheckCircle2 } from "lucide-react";
+import hajjHeroBg from "@/assets/hajj-hero-bg.jpg";
 import pkgHajjCombo from "@/assets/pkg-hajj-combo.jpg";
 import pkgHajjMen from "@/assets/pkg-hajj-men.jpg";
 import pkgHajjMenPremium from "@/assets/pkg-hajj-men-premium.jpg";
