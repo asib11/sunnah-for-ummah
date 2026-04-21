@@ -193,6 +193,7 @@ const HajjPackages = () => {
           })}
         </div>
       </div>
+      </div>
     </section>
   );
 };
