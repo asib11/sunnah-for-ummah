@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Check } from "lucide-react";
+import { Check, Star, CheckCircle2 } from "lucide-react";
+import hajjHeroBg from "@/assets/hajj-hero-bg.jpg";
 import pkgHajjCombo from "@/assets/pkg-hajj-combo.jpg";
 import pkgHajjMen from "@/assets/pkg-hajj-men.jpg";
 import pkgHajjMenPremium from "@/assets/pkg-hajj-men-premium.jpg";
@@ -69,18 +70,65 @@ const packages: Package[] = [
 
 const HajjPackages = () => {
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-b from-secondary/40 to-background">
+    <section className="relative">
+      {/* Hero banner */}
+      <div className="relative overflow-hidden">
+        <div className="absolute inset-0">
+          <img
+            src={hajjHeroBg}
+            alt="Pilgrims at the Kaaba in Mecca"
+            loading="lazy"
+            width={1920}
+            height={1080}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/70 to-primary/85" />
+        </div>
+
+        <div className="relative container mx-auto px-4 py-16 md:py-24 text-center">
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-accent/60 bg-primary/30 backdrop-blur-sm">
+            <Star className="w-4 h-4 fill-accent text-accent" />
+            <span className="font-body text-sm font-medium text-accent">
+              সম্পূর্ণ হজ্জ ও উমরাহ সামগ্রী
+            </span>
+          </div>
+
+          <h2 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-primary-foreground mt-6 leading-tight">
+            Hajj Mabroor
+          </h2>
+          <p className="font-display text-3xl md:text-5xl text-accent mt-2 italic">
+            হজ্জ মাবরূর
+          </p>
+
+          <p className="font-body text-base md:text-lg text-primary-foreground/90 mt-6 max-w-2xl mx-auto leading-relaxed">
+            Everything you need for a blessed journey — carefully curated,
+            quality-assured, and packed in one convenient kit.
+          </p>
+
+          <div className="mt-10 grid grid-cols-3 gap-4 md:gap-8 max-w-2xl mx-auto">
+            <div className="flex flex-col items-center">
+              <span className="font-display text-3xl md:text-5xl font-bold text-accent">21+</span>
+              <span className="font-body text-xs md:text-sm text-primary-foreground/80 mt-1">Essential Items</span>
+            </div>
+            <div className="flex flex-col items-center border-x border-primary-foreground/20">
+              <span className="font-display text-3xl md:text-5xl font-bold text-accent">6</span>
+              <span className="font-body text-xs md:text-sm text-primary-foreground/80 mt-1">Package Options</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <CheckCircle2 className="w-8 h-8 md:w-11 md:h-11 text-accent" strokeWidth={1.8} />
+              <span className="font-body text-xs md:text-sm text-primary-foreground/80 mt-1">Quality Assured</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Packages grid */}
+      <div className="py-16 md:py-20 bg-gradient-to-b from-secondary/40 to-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <span className="font-body text-sm font-semibold tracking-[0.2em] uppercase text-accent">
-            Hajj &amp; Umrah Kits
-          </span>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-2">
+          <h3 className="font-display text-3xl md:text-4xl font-bold text-foreground">
             Choose Your Package
-          </h2>
-          <p className="font-body text-muted-foreground mt-3 max-w-xl mx-auto">
-            Select the perfect kit for your sacred journey — carefully curated, quality-assured.
-          </p>
+          </h3>
           <div className="w-16 h-1 bg-accent mx-auto mt-4 rounded-full" />
         </div>
 
@@ -144,6 +192,7 @@ const HajjPackages = () => {
             );
           })}
         </div>
+      </div>
       </div>
     </section>
   );
