@@ -120,7 +120,21 @@ const HajjPackages = () => {
               <span className="font-body text-xs md:text-sm text-primary-foreground/80 mt-1">Quality Assured</span>
             </div>
           </div>
+        </div>
+      </div>
 
+      {/* What's Inside the Kit */}
+      <div className="py-16 md:py-20 bg-gradient-to-b from-background to-secondary/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-4">
+            <h3 className="font-display text-3xl md:text-4xl font-bold text-foreground">
+              What's Inside the Kit
+            </h3>
+            <p className="font-body text-sm md:text-base text-muted-foreground mt-3">
+              21 premium items — Total value <span className="font-bold text-primary">৳4,640</span>
+            </p>
+            <div className="w-16 h-1 bg-accent mx-auto mt-4 rounded-full" />
+          </div>
           <HajjKitDetails />
         </div>
       </div>
@@ -132,8 +146,12 @@ const HajjPackages = () => {
           <h3 className="font-display text-3xl md:text-4xl font-bold text-foreground">
             Choose Your Package
           </h3>
+          <p className="font-body text-sm md:text-base text-muted-foreground mt-3">
+            Click a package to see details and place your order
+          </p>
           <div className="w-16 h-1 bg-accent mx-auto mt-4 rounded-full" />
         </div>
+
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
           {packages.map((pkg) => {
