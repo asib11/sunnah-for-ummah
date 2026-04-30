@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Check, Star, CheckCircle2 } from "lucide-react";
+import HajjKitDetails from "./HajjKitDetails";
 import hajjHeroBg from "@/assets/hajj-hero-bg.jpg";
 import pkgHajjCombo from "@/assets/pkg-hajj-combo.jpg";
 import pkgHajjMen from "@/assets/pkg-hajj-men.jpg";
@@ -119,6 +120,8 @@ const HajjPackages = () => {
               <span className="font-body text-xs md:text-sm text-primary-foreground/80 mt-1">Quality Assured</span>
             </div>
           </div>
+
+          <HajjKitDetails />
         </div>
       </div>
 
