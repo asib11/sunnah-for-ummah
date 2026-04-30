@@ -103,7 +103,9 @@ const HeroBanner = () => {
               height={800}
               className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out"
               style={{ opacity: i === currentImageIndex ? 1 : 0 }}
-              {...(i !== 0 ? { loading: "lazy" as const } : {})}
+              {...(i === 0
+                ? { fetchPriority: "high" as const, decoding: "async" as const }
+                : { loading: "lazy" as const, decoding: "async" as const })}
             />
           ))}
         </div>
