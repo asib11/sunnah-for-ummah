@@ -1,5 +1,6 @@
 import { Search, ShoppingCart, Heart, User, Menu, X } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+import logoSfu from "@/assets/logo-sfu.png";
 
 const searchProducts = [
   "Premium Black Embroidered Panjabi",
@@ -80,13 +81,21 @@ const Header = () => {
         </div>
 
         {/* Logo */}
-        <div className="flex flex-col items-center">
-          <h1 className="font-display text-xl md:text-2xl font-bold text-primary tracking-wide">
-            Sunnah For Ummah
-          </h1>
-          <span className="uppercase tracking-[0.3em] font-body text-xs font-bold text-emerald-light">
-            SUNNAH: THE LEGACY OF THE BEST.
-          </span>
+        <div className="flex items-center gap-3">
+          <img
+            src={logoSfu}
+            alt="Sunnah For Ummah logo"
+            className="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover shadow-md ring-1 ring-primary/20"
+            loading="eager"
+          />
+          <div className="flex flex-col items-center">
+            <h1 className="font-display text-xl md:text-2xl font-bold text-primary tracking-wide">
+              Sunnah For Ummah
+            </h1>
+            <span className="uppercase tracking-[0.3em] font-body text-[10px] md:text-xs font-bold text-emerald-light">
+              SUNNAH: THE LEGACY OF THE BEST.
+            </span>
+          </div>
         </div>
 
         {/* Icons */}
