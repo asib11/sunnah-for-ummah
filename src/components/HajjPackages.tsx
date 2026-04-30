@@ -120,6 +120,8 @@ const HajjPackages = () => {
               <span className="font-body text-xs md:text-sm text-primary-foreground/80 mt-1">Quality Assured</span>
             </div>
           </div>
+
+          <HajjKitDetails />
         </div>
       </div>
 
