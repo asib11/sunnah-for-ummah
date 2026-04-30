@@ -55,7 +55,13 @@ const HajjKitDetails = () => {
   const [activeCat, setActiveCat] = useState<string>("All");
 
   const kitItems = useMemo(
-    () => items.filter((i) => i.kit === kit || i.kit === "both"),
+    () =>
+      items.filter((i) => {
+        if (i.kit === "both") return true;
+        if (kit === "men") return i.kit === "men" || i.kit === "men-all";
+        if (kit === "men-premium") return i.kit === "men-premium" || i.kit === "men-all";
+        return i.kit === "women";
+      }),
     [kit]
   );
 
@@ -67,24 +73,35 @@ const HajjKitDetails = () => {
   const countFor = (cat: string) =>
     cat === "All" ? kitItems.length : kitItems.filter((i) => i.category === cat).length;
 
+  const kitOptions: { key: Kit; label: string; icon?: typeof Crown }[] = [
+    { key: "men", label: "🧔 Men's Kit" },
+    { key: "men-premium", label: "Men's Kit Premium", icon: Crown },
+    { key: "women", label: "🧕 Women's Kit" },
+  ];
+
   return (
     <div className="mt-12 max-w-6xl mx-auto">
       {/* Kit toggle */}
       <div className="flex justify-center">
-        <div className="inline-flex p-1.5 rounded-full bg-background/95 backdrop-blur-sm shadow-lg border border-border">
-          {(["men", "women"] as Kit[]).map((k) => (
-            <button
-              key={k}
-              onClick={() => setKit(k)}
-              className={`px-6 py-2.5 rounded-full font-body text-sm font-semibold transition-all ${
-                kit === k
-                  ? "bg-primary text-primary-foreground shadow-md"
-                  : "text-foreground/70 hover:text-foreground"
-              }`}
-            >
-              {k === "men" ? "🧔 Men's Kit" : "🧕 Women's Kit"}
-            </button>
-          ))}
+        <div className="inline-flex flex-wrap p-1.5 rounded-full bg-background/95 backdrop-blur-sm shadow-lg border border-border gap-1">
+          {kitOptions.map((opt) => {
+            const Icon = opt.icon;
+            const active = kit === opt.key;
+            return (
+              <button
+                key={opt.key}
+                onClick={() => setKit(opt.key)}
+                className={`inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full font-body text-sm font-semibold transition-all ${
+                  active
+                    ? "bg-primary text-primary-foreground shadow-md"
+                    : "text-foreground/70 hover:text-foreground"
+                }`}
+              >
+                {Icon && <Icon className={`w-4 h-4 ${active ? "text-accent" : "text-accent"}`} />}
+                {opt.label}
+              </button>
+            );
+          })}
         </div>
       </div>
 
