@@ -1,14 +1,14 @@
 import { useMemo, useState } from "react";
-import { CheckCircle2, Shirt, Droplets, Backpack, Sparkles, BedDouble } from "lucide-react";
+import { CheckCircle2, Shirt, Droplets, Backpack, Sparkles, BedDouble, Crown } from "lucide-react";
 
-type Kit = "men" | "women";
+type Kit = "men" | "men-premium" | "women";
 
 type Item = {
   name: string;
   bangla: string;
   price: number;
   category: "Clothing & Wear" | "Hygiene & Care" | "Bags & Accessories" | "Spiritual Essentials" | "Comfort & Bedding";
-  kit: Kit | "both";
+  kit: Kit | "both" | "men-all";
 };
 
 const items: Item[] = [
