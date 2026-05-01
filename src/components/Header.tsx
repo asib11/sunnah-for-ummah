@@ -69,8 +69,8 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
       {/* Top bar */}
-      <div className="container mx-auto flex items-center justify-between px-4 py-3">
-        {/* Search */}
+      <div className="container mx-auto flex items-center justify-between gap-3 px-4 py-3">
+        {/* Search - desktop */}
         <div className="hidden md:flex items-center gap-2 bg-secondary rounded-full px-4 py-2 w-72">
           <Search className="w-4 h-4 text-muted-foreground" />
           <input
@@ -81,7 +81,7 @@ const Header = () => {
         </div>
 
         {/* Logo */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 md:gap-3 min-w-0">
           <img
             src={logoSfu}
             alt="Sunnah For Ummah logo"
@@ -122,6 +122,18 @@ const Header = () => {
           <button className="p-2 hover:text-primary transition-colors hidden md:block">
             <User className="w-5 h-5" />
           </button>
+        </div>
+      </div>
+
+      {/* Mobile search - always visible */}
+      <div className="md:hidden px-4 pb-3">
+        <div className="flex items-center gap-2 bg-secondary rounded-full px-4 py-2">
+          <Search className="w-4 h-4 text-muted-foreground shrink-0" />
+          <input
+            type="text"
+            placeholder={typingText || "Search"}
+            className="bg-transparent outline-none text-sm text-foreground placeholder:text-muted-foreground w-full font-body"
+          />
         </div>
       </div>
 
