@@ -159,22 +159,22 @@ const HajjPackages = () => {
             return (
               <article
                 key={pkg.title}
-                className="group relative flex flex-col rounded-2xl overflow-hidden bg-card border border-border shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-hover)] transition-all duration-500 hover:-translate-y-1"
+                className="amoeba-card group relative flex flex-col bg-card border border-border shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-hover)] transition-all duration-500 hover:-translate-y-1"
               >
                 {pkg.badge && (
-                  <span className="absolute top-3 left-3 z-10 font-body text-[10px] font-bold tracking-[0.15em] uppercase px-3 py-1 rounded-full bg-accent text-accent-foreground shadow-md">
+                  <span className="absolute top-4 left-4 z-10 font-body text-[10px] font-bold tracking-[0.15em] uppercase px-3 py-1 rounded-full bg-accent text-accent-foreground shadow-md">
                     {pkg.badge}
                   </span>
                 )}
 
-                <div className="relative aspect-square overflow-hidden bg-muted">
+                <div className="amoeba-img relative aspect-square overflow-hidden bg-muted m-3">
                   <img
                     src={pkg.image}
                     alt={pkg.title}
                     loading="lazy"
                     width={800}
                     height={800}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
                 </div>
 
