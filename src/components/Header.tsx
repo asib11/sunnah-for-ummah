@@ -88,7 +88,7 @@ const Header = () => {
             className="w-12 h-12 md:w-14 md:h-14 rounded-full object-cover shadow-md ring-1 ring-primary/20"
             loading="eager"
           />
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-start">
             <h1 className="font-display text-xl md:text-2xl font-bold text-primary tracking-wide">
               Sunnah For Ummah
             </h1>
