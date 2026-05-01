@@ -182,12 +182,18 @@ const HajjPackages = () => {
                 {/* Amoeba image with layered shape-shifting blobs */}
                 <div className="relative z-10 mx-auto w-full">
                   <div className="relative aspect-square">
-                    {/* Layered morphing blobs behind image — fluid like reference */}
-                    <span className="amoeba-blob-bg pointer-events-none absolute -inset-4 bg-gradient-to-br from-accent/40 via-primary/25 to-accent/15 blur-[2px]" />
-                    <span className="amoeba-blob-accent pointer-events-none absolute -top-3 -right-5 w-16 h-16 bg-gradient-to-br from-accent/70 to-primary/40" />
-                    <span className="amoeba-blob-accent pointer-events-none absolute -bottom-4 -left-4 w-14 h-14 bg-gradient-to-tr from-primary/60 to-accent/40" style={{ animationDelay: "-2s" }} />
+                    {/* Vibrant fluid blobs — pinks, purples, blues popping off white */}
+                    <span className="amoeba-blob-bg pointer-events-none absolute -inset-5 bg-[linear-gradient(135deg,#7c3aed_0%,#3b82f6_45%,#ec4899_100%)] opacity-90 blur-[1px]" />
+                    <span className="amoeba-blob-accent pointer-events-none absolute -top-5 -right-6 w-20 h-20 bg-[linear-gradient(135deg,#ec4899,#a855f7)] opacity-90 blur-[1px]" />
+                    <span className="amoeba-blob-accent pointer-events-none absolute -bottom-5 -left-5 w-16 h-16 bg-[linear-gradient(135deg,#06b6d4,#3b82f6)] opacity-85 blur-[1px]" style={{ animationDelay: "-2s" }} />
+                    <span className="amoeba-blob-accent pointer-events-none absolute top-1/2 -left-7 w-10 h-10 bg-[linear-gradient(135deg,#f472b6,#fb7185)] opacity-90" style={{ animationDelay: "-3.5s" }} />
 
-                    <div className="amoeba-img relative w-full h-full overflow-hidden bg-muted ring-4 ring-background shadow-lg">
+                    {/* Tiny floating decorative rings & sparks like the reference */}
+                    <span className="pointer-events-none absolute -top-2 left-1/3 w-4 h-4 rounded-full border-2 border-pink-400/80" />
+                    <span className="pointer-events-none absolute bottom-2 -right-2 w-3 h-3 rounded-full border-2 border-violet-400/80" />
+                    <span className="pointer-events-none absolute top-4 -right-1 w-2 h-2 rounded-full bg-pink-500" />
+
+                    <div className="amoeba-img relative w-full h-full overflow-hidden bg-muted ring-4 ring-white shadow-xl">
                       <img
                         src={pkg.image}
                         alt={pkg.title}
