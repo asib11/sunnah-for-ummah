@@ -179,17 +179,24 @@ const HajjPackages = () => {
                   </span>
                 )}
 
-                {/* Amoeba image only */}
+                {/* Amoeba image with layered shape-shifting blobs */}
                 <div className="relative z-10 mx-auto w-full">
-                  <div className="amoeba-img relative aspect-square overflow-hidden bg-muted ring-4 ring-background shadow-lg">
-                    <img
-                      src={pkg.image}
-                      alt={pkg.title}
-                      loading="lazy"
-                      width={800}
-                      height={800}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
+                  <div className="relative aspect-square">
+                    {/* Layered morphing blobs behind image — fluid like reference */}
+                    <span className="amoeba-blob-bg pointer-events-none absolute -inset-4 bg-gradient-to-br from-accent/40 via-primary/25 to-accent/15 blur-[2px]" />
+                    <span className="amoeba-blob-accent pointer-events-none absolute -top-3 -right-5 w-16 h-16 bg-gradient-to-br from-accent/70 to-primary/40" />
+                    <span className="amoeba-blob-accent pointer-events-none absolute -bottom-4 -left-4 w-14 h-14 bg-gradient-to-tr from-primary/60 to-accent/40" style={{ animationDelay: "-2s" }} />
+
+                    <div className="amoeba-img relative w-full h-full overflow-hidden bg-muted ring-4 ring-background shadow-lg">
+                      <img
+                        src={pkg.image}
+                        alt={pkg.title}
+                        loading="lazy"
+                        width={800}
+                        height={800}
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                    </div>
                   </div>
                 </div>
 
