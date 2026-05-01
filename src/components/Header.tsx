@@ -69,8 +69,8 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
       {/* Top bar */}
-      <div className="container mx-auto flex items-center justify-between px-4 py-3">
-        {/* Search */}
+      <div className="container mx-auto flex items-center justify-between gap-3 px-4 py-3">
+        {/* Search - desktop */}
         <div className="hidden md:flex items-center gap-2 bg-secondary rounded-full px-4 py-2 w-72">
           <Search className="w-4 h-4 text-muted-foreground" />
           <input
@@ -81,7 +81,7 @@ const Header = () => {
         </div>
 
         {/* Logo */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 md:gap-3 min-w-0">
           <img
             src={logoSfu}
             alt="Sunnah For Ummah logo"
