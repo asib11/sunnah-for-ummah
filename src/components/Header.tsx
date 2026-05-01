@@ -125,6 +125,18 @@ const Header = () => {
         </div>
       </div>
 
+      {/* Mobile search - always visible */}
+      <div className="md:hidden px-4 pb-3">
+        <div className="flex items-center gap-2 bg-secondary rounded-full px-4 py-2">
+          <Search className="w-4 h-4 text-muted-foreground shrink-0" />
+          <input
+            type="text"
+            placeholder={typingText || "Search"}
+            className="bg-transparent outline-none text-sm text-foreground placeholder:text-muted-foreground w-full font-body"
+          />
+        </div>
+      </div>
+
       {/* Navigation */}
       <nav className="hidden md:block border-t border-border">
         <div className="container mx-auto flex items-center justify-center gap-8 px-4 py-2.5">
