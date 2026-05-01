@@ -153,32 +153,48 @@ const HajjPackages = () => {
         </div>
 
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
-          {packages.map((pkg) => {
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          {packages.map((pkg, idx) => {
             const savings = pkg.oldPrice ? pkg.oldPrice - pkg.price : 0;
             return (
               <article
                 key={pkg.title}
-                className="amoeba-card group relative flex flex-col bg-card border border-border shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-hover)] transition-all duration-500 hover:-translate-y-1"
+                className="group relative flex flex-col rounded-3xl bg-card border border-border shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-hover)] transition-all duration-500 hover:-translate-y-2 p-5 overflow-hidden"
               >
+                {/* Geometric decorative shapes */}
+                <span className="pointer-events-none absolute -top-8 -right-8 w-24 h-24 rotate-12 bg-accent/15 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] group-hover:rotate-45 transition-transform duration-700" />
+                <span className="pointer-events-none absolute -bottom-10 -left-10 w-28 h-28 border-2 border-dashed border-primary/20 rounded-full group-hover:scale-110 transition-transform duration-700" />
+                <span
+                  className="pointer-events-none absolute top-1/2 -right-3 w-6 h-6 bg-primary/20"
+                  style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}
+                />
+                <span
+                  className="pointer-events-none absolute bottom-20 right-4 w-3 h-3 bg-accent/60"
+                  style={{ clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)" }}
+                />
+
                 {pkg.badge && (
-                  <span className="absolute top-4 left-4 z-10 font-body text-[10px] font-bold tracking-[0.15em] uppercase px-3 py-1 rounded-full bg-accent text-accent-foreground shadow-md">
+                  <span className="absolute top-4 left-4 z-20 font-body text-[10px] font-bold tracking-[0.15em] uppercase px-3 py-1 rounded-full bg-accent text-accent-foreground shadow-md">
                     {pkg.badge}
                   </span>
                 )}
 
-                <div className="amoeba-img relative aspect-square overflow-hidden bg-muted m-3">
-                  <img
-                    src={pkg.image}
-                    alt={pkg.title}
-                    loading="lazy"
-                    width={800}
-                    height={800}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
+                {/* Amoeba image only */}
+                <div className="relative z-10 mx-auto w-full">
+                  <div className="amoeba-img relative aspect-square overflow-hidden bg-muted ring-4 ring-background shadow-lg">
+                    <img
+                      src={pkg.image}
+                      alt={pkg.title}
+                      loading="lazy"
+                      width={800}
+                      height={800}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                  </div>
                 </div>
 
-                <div className="flex flex-col flex-1 p-5">
+                {/* Details — clean rectangle, fully visible */}
+                <div className="relative z-10 flex flex-col flex-1 mt-5">
                   <h3 className="font-display text-lg font-bold text-foreground leading-snug">
                     {pkg.title}
                   </h3>
@@ -186,7 +202,7 @@ const HajjPackages = () => {
                     {pkg.bangla}
                   </p>
 
-                  <div className="mt-4 flex items-baseline gap-2">
+                  <div className="mt-3 flex items-baseline gap-2">
                     <span className="font-display text-2xl font-bold text-primary">
                       ৳{pkg.price.toLocaleString()}
                     </span>
@@ -203,7 +219,7 @@ const HajjPackages = () => {
                   )}
 
                   <Button
-                    className="mt-5 w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+                    className="mt-4 w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-full"
                     size="sm"
                   >
                     Select Package
