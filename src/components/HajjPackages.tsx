@@ -142,9 +142,9 @@ const HajjPackages = () => {
       {/* Packages grid */}
       <div className="relative py-20 md:py-28 overflow-hidden bg-gradient-to-b from-secondary/40 via-background to-emerald-50/40">
         {/* Decorative background blobs */}
-        <span className="amoeba-blob-wild pointer-events-none absolute -top-20 -left-20 w-96 h-96 bg-[radial-gradient(circle_at_30%_30%,hsl(152_60%_45%/0.25),transparent_70%)] blur-2xl" />
-        <span className="amoeba-blob-wild pointer-events-none absolute top-1/3 -right-32 w-[28rem] h-[28rem] bg-[radial-gradient(circle_at_50%_50%,hsl(152_45%_25%/0.2),transparent_70%)] blur-2xl" style={{ animationDelay: "-4s" }} />
-        <span className="amoeba-blob-wild pointer-events-none absolute -bottom-20 left-1/4 w-80 h-80 bg-[radial-gradient(circle_at_50%_50%,hsl(140_55%_55%/0.18),transparent_70%)] blur-2xl" style={{ animationDelay: "-7s" }} />
+        <span className="pointer-events-none absolute -top-20 -left-20 w-96 h-96 rounded-[62%_38%_54%_46%/48%_56%_44%_52%] bg-[radial-gradient(circle_at_30%_30%,hsl(152_60%_45%/0.25),transparent_70%)] blur-2xl" />
+        <span className="pointer-events-none absolute top-1/3 -right-32 w-[28rem] h-[28rem] rounded-[40%_60%_70%_30%/50%_30%_70%_50%] bg-[radial-gradient(circle_at_50%_50%,hsl(152_45%_25%/0.2),transparent_70%)] blur-2xl" />
+        <span className="pointer-events-none absolute -bottom-20 left-1/4 w-80 h-80 rounded-[70%_30%_46%_54%/38%_62%_38%_62%] bg-[radial-gradient(circle_at_50%_50%,hsl(140_55%_55%/0.18),transparent_70%)] blur-2xl" />
 
         <div className="relative container mx-auto px-4">
           <div className="text-center mb-14">
