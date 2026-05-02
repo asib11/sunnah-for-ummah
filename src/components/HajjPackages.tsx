@@ -140,109 +140,135 @@ const HajjPackages = () => {
       </div>
 
       {/* Packages grid */}
-      <div className="py-16 md:py-20 bg-gradient-to-b from-secondary/40 to-background">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h3 className="font-display text-3xl md:text-4xl font-bold text-foreground">
-            Choose Your Package
-          </h3>
-          <p className="font-body text-sm md:text-base text-muted-foreground mt-3">
-            Click a package to see details and place your order
-          </p>
-          <div className="w-16 h-1 bg-accent mx-auto mt-4 rounded-full" />
-        </div>
+      <div className="relative py-20 md:py-28 overflow-hidden bg-gradient-to-b from-secondary/40 via-background to-emerald-50/40">
+        {/* Decorative background blobs */}
+        <span className="amoeba-blob-wild pointer-events-none absolute -top-20 -left-20 w-96 h-96 bg-[radial-gradient(circle_at_30%_30%,hsl(152_60%_45%/0.25),transparent_70%)] blur-2xl" />
+        <span className="amoeba-blob-wild pointer-events-none absolute top-1/3 -right-32 w-[28rem] h-[28rem] bg-[radial-gradient(circle_at_50%_50%,hsl(152_45%_25%/0.2),transparent_70%)] blur-2xl" style={{ animationDelay: "-4s" }} />
+        <span className="amoeba-blob-wild pointer-events-none absolute -bottom-20 left-1/4 w-80 h-80 bg-[radial-gradient(circle_at_50%_50%,hsl(140_55%_55%/0.18),transparent_70%)] blur-2xl" style={{ animationDelay: "-7s" }} />
 
+        <div className="relative container mx-auto px-4">
+          <div className="text-center mb-14">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+              <span className="font-body text-xs font-semibold tracking-widest uppercase text-primary">
+                Curated Packages
+              </span>
+            </span>
+            <h3 className="font-display text-4xl md:text-5xl font-bold text-foreground mt-4">
+              Choose Your <span className="italic text-primary">Package</span>
+            </h3>
+            <p className="font-body text-sm md:text-base text-muted-foreground mt-3 max-w-xl mx-auto">
+              Click a package to see details and place your order
+            </p>
+            <div className="flex items-center justify-center gap-2 mt-5">
+              <span className="w-12 h-[2px] bg-gradient-to-r from-transparent to-accent rounded-full" />
+              <span className="w-2 h-2 rotate-45 bg-accent" />
+              <span className="w-12 h-[2px] bg-gradient-to-l from-transparent to-accent rounded-full" />
+            </div>
+          </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-          {packages.map((pkg, idx) => {
-            const savings = pkg.oldPrice ? pkg.oldPrice - pkg.price : 0;
-            return (
-              <article
-                key={pkg.title}
-                className="group relative flex flex-col rounded-3xl bg-card border border-border shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-hover)] transition-all duration-500 hover:-translate-y-2 p-5 overflow-hidden"
-              >
-                {/* Geometric decorative shapes */}
-                <span className="pointer-events-none absolute -top-8 -right-8 w-24 h-24 rotate-12 bg-accent/15 rounded-[30%_70%_70%_30%/30%_30%_70%_70%] group-hover:rotate-45 transition-transform duration-700" />
-                <span className="pointer-events-none absolute -bottom-10 -left-10 w-28 h-28 border-2 border-dashed border-primary/20 rounded-full group-hover:scale-110 transition-transform duration-700" />
-                <span
-                  className="pointer-events-none absolute top-1/2 -right-3 w-6 h-6 bg-primary/20"
-                  style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}
-                />
-                <span
-                  className="pointer-events-none absolute bottom-20 right-4 w-3 h-3 bg-accent/60"
-                  style={{ clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)" }}
-                />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
+            {packages.map((pkg, idx) => {
+              const savings = pkg.oldPrice ? pkg.oldPrice - pkg.price : 0;
+              return (
+                <article
+                  key={pkg.title}
+                  className="group amoeba-float relative flex flex-col rounded-[2rem] bg-card/80 backdrop-blur-sm border border-primary/10 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-hover)] transition-all duration-500 hover:-translate-y-3 p-6 overflow-visible"
+                >
+                  {/* Creative geometric decorations — green palette */}
+                  <span className="amoeba-spin-slow pointer-events-none absolute -top-6 -right-6 w-20 h-20 border-2 border-dashed border-primary/30 rounded-full" />
+                  <span className="amoeba-spin-reverse pointer-events-none absolute -bottom-4 -left-4 w-14 h-14 border border-accent/40 rounded-[40%_60%_60%_40%/50%_40%_60%_50%]" />
+                  <span
+                    className="pointer-events-none absolute top-12 -right-2 w-4 h-4 bg-emerald-500/40"
+                    style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}
+                  />
+                  <span
+                    className="pointer-events-none absolute bottom-24 -left-2 w-3 h-3 bg-accent/70"
+                    style={{ clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)" }}
+                  />
+                  <span className="pointer-events-none absolute top-3 right-10 w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                  <span className="pointer-events-none absolute bottom-32 right-3 w-1 h-1 rounded-full bg-emerald-600" />
 
-                {pkg.badge && (
-                  <span className="absolute top-4 left-4 z-20 font-body text-[10px] font-bold tracking-[0.15em] uppercase px-3 py-1 rounded-full bg-accent text-accent-foreground shadow-md">
-                    {pkg.badge}
-                  </span>
-                )}
+                  {/* Connector dotted line for visual flow */}
+                  <span className="pointer-events-none absolute top-1/2 left-0 w-full h-[1px] bg-[repeating-linear-gradient(90deg,hsl(var(--primary)/0.15)_0_4px,transparent_4px_10px)] opacity-50" />
 
-                {/* Amoeba image with layered shape-shifting blobs */}
-                <div className="relative z-10 mx-auto w-full">
-                  <div className="relative aspect-square">
-                    {/* Vibrant fluid blobs — pinks, purples, blues popping off white */}
-                    <span className="amoeba-blob-bg pointer-events-none absolute -inset-5 bg-[linear-gradient(135deg,#7c3aed_0%,#3b82f6_45%,#ec4899_100%)] opacity-90 blur-[1px]" />
-                    <span className="amoeba-blob-accent pointer-events-none absolute -top-5 -right-6 w-20 h-20 bg-[linear-gradient(135deg,#ec4899,#a855f7)] opacity-90 blur-[1px]" />
-                    <span className="amoeba-blob-accent pointer-events-none absolute -bottom-5 -left-5 w-16 h-16 bg-[linear-gradient(135deg,#06b6d4,#3b82f6)] opacity-85 blur-[1px]" style={{ animationDelay: "-2s" }} />
-                    <span className="amoeba-blob-accent pointer-events-none absolute top-1/2 -left-7 w-10 h-10 bg-[linear-gradient(135deg,#f472b6,#fb7185)] opacity-90" style={{ animationDelay: "-3.5s" }} />
-
-                    {/* Tiny floating decorative rings & sparks like the reference */}
-                    <span className="pointer-events-none absolute -top-2 left-1/3 w-4 h-4 rounded-full border-2 border-pink-400/80" />
-                    <span className="pointer-events-none absolute bottom-2 -right-2 w-3 h-3 rounded-full border-2 border-violet-400/80" />
-                    <span className="pointer-events-none absolute top-4 -right-1 w-2 h-2 rounded-full bg-pink-500" />
-
-                    <div className="amoeba-img relative w-full h-full overflow-hidden bg-muted ring-4 ring-white shadow-xl">
-                      <img
-                        src={pkg.image}
-                        alt={pkg.title}
-                        loading="lazy"
-                        width={800}
-                        height={800}
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Details — clean rectangle, fully visible */}
-                <div className="relative z-10 flex flex-col flex-1 mt-5">
-                  <h3 className="font-display text-lg font-bold text-foreground leading-snug">
-                    {pkg.title}
-                  </h3>
-                  <p className="font-body text-sm text-muted-foreground mt-1">
-                    {pkg.bangla}
-                  </p>
-
-                  <div className="mt-3 flex items-baseline gap-2">
-                    <span className="font-display text-2xl font-bold text-primary">
-                      ৳{pkg.price.toLocaleString()}
-                    </span>
-                    {pkg.oldPrice && (
-                      <span className="font-body text-sm text-muted-foreground line-through">
-                        ৳{pkg.oldPrice.toLocaleString()}
-                      </span>
-                    )}
-                  </div>
-                  {savings > 0 && (
-                    <span className="mt-1 inline-flex items-center gap-1 font-body text-xs font-semibold text-accent">
-                      <Check className="w-3 h-3" /> Save ৳{savings.toLocaleString()}
+                  {pkg.badge && (
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 z-30 font-body text-[10px] font-bold tracking-[0.2em] uppercase px-4 py-1.5 rounded-full bg-gradient-to-r from-accent to-amber-400 text-accent-foreground shadow-lg ring-2 ring-background">
+                      ★ {pkg.badge}
                     </span>
                   )}
 
-                  <Button
-                    className="mt-4 w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-full"
-                    size="sm"
-                  >
-                    Select Package
-                  </Button>
-                </div>
-              </article>
-            );
-          })}
+                  {/* Amoeba image with green-shaded shape-shifting blobs */}
+                  <div className="relative z-10 mx-auto w-full">
+                    <div className="relative aspect-square">
+                      {/* Main green gradient morphing blob */}
+                      <span className="amoeba-blob-wild pointer-events-none absolute -inset-6 bg-[linear-gradient(135deg,hsl(152_55%_30%)_0%,hsl(140_60%_45%)_50%,hsl(165_70%_55%)_100%)] opacity-95 shadow-[0_10px_40px_-10px_hsl(152_50%_30%/0.5)]" />
+
+                      {/* Secondary morphing accent blobs in deeper greens */}
+                      <span className="amoeba-blob-wild pointer-events-none absolute -top-7 -right-8 w-24 h-24 bg-[linear-gradient(135deg,hsl(160_70%_40%),hsl(145_65%_50%))] opacity-90" style={{ animationDelay: "-2s" }} />
+                      <span className="amoeba-blob-wild pointer-events-none absolute -bottom-6 -left-7 w-20 h-20 bg-[linear-gradient(135deg,hsl(170_75%_45%),hsl(152_60%_35%))] opacity-90" style={{ animationDelay: "-4s" }} />
+                      <span className="amoeba-blob-accent pointer-events-none absolute top-1/3 -left-8 w-12 h-12 bg-[linear-gradient(135deg,hsl(85_70%_55%),hsl(140_65%_50%))] opacity-90" style={{ animationDelay: "-3s" }} />
+                      <span className="amoeba-blob-accent pointer-events-none absolute -bottom-3 right-2 w-10 h-10 bg-[linear-gradient(135deg,hsl(45_85%_60%),hsl(140_60%_50%))] opacity-85" style={{ animationDelay: "-5s" }} />
+
+                      {/* Decorative micro elements */}
+                      <span className="pointer-events-none absolute -top-3 left-1/3 w-5 h-5 rounded-full border-2 border-emerald-300/90" />
+                      <span className="pointer-events-none absolute bottom-1 -right-3 w-3 h-3 rounded-full border-2 border-emerald-200/80" />
+                      <span className="pointer-events-none absolute top-6 -right-2 w-2 h-2 rounded-full bg-lime-400" />
+                      <span className="pointer-events-none absolute -bottom-1 left-4 w-1.5 h-1.5 rounded-full bg-emerald-300" />
+
+                      {/* The image inside organic morphing frame */}
+                      <div className="amoeba-img relative w-full h-full overflow-hidden bg-muted ring-4 ring-background shadow-2xl">
+                        <img
+                          src={pkg.image}
+                          alt={pkg.title}
+                          loading="lazy"
+                          width={800}
+                          height={800}
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        {/* Subtle green tint overlay on hover */}
+                        <span className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-primary/0 via-primary/0 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Details */}
+                  <div className="relative z-10 flex flex-col flex-1 mt-6 text-center">
+                    <h3 className="font-display text-lg font-bold text-foreground leading-snug group-hover:text-primary transition-colors">
+                      {pkg.title}
+                    </h3>
+                    <p className="font-body text-sm text-muted-foreground mt-1">
+                      {pkg.bangla}
+                    </p>
+
+                    <div className="mt-4 flex items-baseline justify-center gap-2">
+                      <span className="font-display text-3xl font-bold bg-gradient-to-br from-primary to-emerald-light bg-clip-text text-transparent">
+                        ৳{pkg.price.toLocaleString()}
+                      </span>
+                      {pkg.oldPrice && (
+                        <span className="font-body text-sm text-muted-foreground line-through">
+                          ৳{pkg.oldPrice.toLocaleString()}
+                        </span>
+                      )}
+                    </div>
+                    {savings > 0 && (
+                      <span className="mt-1 inline-flex items-center justify-center gap-1 font-body text-xs font-semibold text-emerald-700">
+                        <Check className="w-3 h-3" /> Save ৳{savings.toLocaleString()}
+                      </span>
+                    )}
+
+                    <Button
+                      className="mt-5 w-full bg-gradient-to-r from-primary to-emerald-light hover:from-emerald-light hover:to-primary text-primary-foreground rounded-full shadow-md hover:shadow-lg transition-all"
+                      size="sm"
+                    >
+                      Select Package
+                    </Button>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
         </div>
-      </div>
       </div>
     </section>
   );
