@@ -173,7 +173,7 @@ const HajjPackages = () => {
               return (
                 <article
                   key={pkg.title}
-                  className="group amoeba-float relative flex flex-col rounded-[2rem] bg-card/80 backdrop-blur-sm border border-primary/10 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-hover)] transition-all duration-500 hover:-translate-y-3 p-6 overflow-visible"
+                  className="group relative flex flex-col rounded-[2rem] bg-card/80 backdrop-blur-sm border border-primary/10 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-hover)] transition-all duration-500 hover:-translate-y-3 p-6 overflow-visible"
                 >
                   {/* Creative geometric decorations — green palette */}
                   <span className="amoeba-spin-slow pointer-events-none absolute -top-6 -right-6 w-20 h-20 border-2 border-dashed border-primary/30 rounded-full" />
