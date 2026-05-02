@@ -198,26 +198,14 @@ const HajjPackages = () => {
                     </span>
                   )}
 
-                  {/* Amoeba image with green-shaded shape-shifting blobs */}
+                  {/* Amoeba image with thin green border + orbiting mini product blobs */}
                   <div className="relative z-10 mx-auto w-full">
                     <div className="relative aspect-square">
-                      {/* Main green gradient blob (static) */}
-                      <span className="pointer-events-none absolute -inset-6 rounded-[62%_38%_54%_46%/48%_56%_44%_52%] bg-[linear-gradient(135deg,hsl(152_55%_30%)_0%,hsl(140_60%_45%)_50%,hsl(165_70%_55%)_100%)] opacity-95 shadow-[0_10px_40px_-10px_hsl(152_50%_30%/0.5)]" />
+                      {/* Soft green gradient backdrop (thin, subtle) */}
+                      <span className="pointer-events-none absolute -inset-3 rounded-[62%_38%_54%_46%/48%_56%_44%_52%] bg-[linear-gradient(135deg,hsl(152_55%_30%/0.18)_0%,hsl(140_60%_45%/0.18)_50%,hsl(165_70%_55%/0.18)_100%)]" />
 
-                      {/* Secondary accent blobs in deeper greens (static) */}
-                      <span className="pointer-events-none absolute -top-7 -right-8 w-24 h-24 rounded-[70%_30%_46%_54%/38%_62%_38%_62%] bg-[linear-gradient(135deg,hsl(160_70%_40%),hsl(145_65%_50%))] opacity-90" />
-                      <span className="pointer-events-none absolute -bottom-6 -left-7 w-20 h-20 rounded-[40%_60%_70%_30%/50%_30%_70%_50%] bg-[linear-gradient(135deg,hsl(170_75%_45%),hsl(152_60%_35%))] opacity-90" />
-                      <span className="pointer-events-none absolute top-1/3 -left-8 w-12 h-12 rounded-[60%_40%_30%_70%/50%_60%_40%_50%] bg-[linear-gradient(135deg,hsl(85_70%_55%),hsl(140_65%_50%))] opacity-90" />
-                      <span className="pointer-events-none absolute -bottom-3 right-2 w-10 h-10 rounded-[50%_50%_70%_30%/40%_60%_40%_60%] bg-[linear-gradient(135deg,hsl(45_85%_60%),hsl(140_60%_50%))] opacity-85" />
-
-                      {/* Decorative micro elements */}
-                      <span className="pointer-events-none absolute -top-3 left-1/3 w-5 h-5 rounded-full border-2 border-emerald-300/90" />
-                      <span className="pointer-events-none absolute bottom-1 -right-3 w-3 h-3 rounded-full border-2 border-emerald-200/80" />
-                      <span className="pointer-events-none absolute top-6 -right-2 w-2 h-2 rounded-full bg-lime-400" />
-                      <span className="pointer-events-none absolute -bottom-1 left-4 w-1.5 h-1.5 rounded-full bg-emerald-300" />
-
-                      {/* The image inside organic morphing frame */}
-                      <div className="relative w-full h-full overflow-hidden rounded-[58%_42%_47%_53%/52%_44%_56%_48%] bg-muted ring-4 ring-background shadow-2xl">
+                      {/* The image inside organic morphing frame — THIN green border */}
+                      <div className="relative w-full h-full overflow-hidden rounded-[58%_42%_47%_53%/52%_44%_56%_48%] bg-muted ring-[1.5px] ring-emerald-500/70 shadow-[0_8px_30px_-8px_hsl(152_50%_30%/0.4)]">
                         <img
                           src={pkg.image}
                           alt={pkg.title}
@@ -226,9 +214,48 @@ const HajjPackages = () => {
                           height={800}
                           className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         />
-                        {/* Subtle green tint overlay on hover */}
                         <span className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-primary/0 via-primary/0 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       </div>
+
+                      {/* Orbit ring 1 — outer, clockwise, 3 mini product blobs */}
+                      <div className="pointer-events-none absolute inset-[-22px] orbit-container">
+                        {[0, 120, 240].map((angle, i) => {
+                          const orbitImg = packages[(idx + i + 1) % packages.length].image;
+                          return (
+                            <div
+                              key={`o1-${i}`}
+                              className="absolute top-1/2 left-1/2 w-12 h-12"
+                              style={{ transform: `rotate(${angle}deg) translate(0, calc(-50% - 50%)) translate(-50%, -50%)` }}
+                            >
+                              <div className="orbit-item w-full h-full rounded-[58%_42%_47%_53%/52%_44%_56%_48%] overflow-hidden ring-[1.5px] ring-emerald-400/70 shadow-md bg-card">
+                                <img src={orbitImg} alt="" loading="lazy" className="w-full h-full object-cover" />
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      {/* Orbit ring 2 — inner-tight, counter-clockwise, 2 smaller product blobs */}
+                      <div className="pointer-events-none absolute inset-[-6px] orbit-container-reverse">
+                        {[60, 240].map((angle, i) => {
+                          const orbitImg = packages[(idx + i + 3) % packages.length].image;
+                          return (
+                            <div
+                              key={`o2-${i}`}
+                              className="absolute top-1/2 left-1/2 w-8 h-8"
+                              style={{ transform: `rotate(${angle}deg) translate(0, calc(-50% - 50%)) translate(-50%, -50%)` }}
+                            >
+                              <div className="orbit-item-reverse w-full h-full rounded-[60%_40%_50%_50%/45%_55%_45%_55%] overflow-hidden ring-[1.5px] ring-lime-400/70 shadow bg-card">
+                                <img src={orbitImg} alt="" loading="lazy" className="w-full h-full object-cover" />
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      {/* Tiny decorative dots */}
+                      <span className="pointer-events-none absolute top-2 -right-1 w-1.5 h-1.5 rounded-full bg-lime-400" />
+                      <span className="pointer-events-none absolute -bottom-1 left-6 w-1.5 h-1.5 rounded-full bg-emerald-300" />
                     </div>
                   </div>
 

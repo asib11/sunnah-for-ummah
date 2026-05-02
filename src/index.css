@@ -164,6 +164,23 @@
 
   /* Floating bob */
   .amoeba-float { animation: amoeba-float 6s ease-in-out infinite; }
+
+  /* Orbit animations — mini blobs rotate around main blob */
+  .orbit-container { animation: orbit-spin 18s linear infinite; }
+  .orbit-container-reverse { animation: orbit-spin 22s linear infinite reverse; }
+  .orbit-container-slow { animation: orbit-spin 28s linear infinite; }
+  .orbit-item { animation: orbit-counter 18s linear infinite; }
+  .orbit-item-reverse { animation: orbit-counter 22s linear infinite reverse; }
+  .orbit-item-slow { animation: orbit-counter 28s linear infinite; }
+
+  @keyframes orbit-spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  @keyframes orbit-counter {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(-360deg); }
+  }
   .amoeba-card:nth-child(2n) .amoeba-float { animation-delay: -2s; }
   .amoeba-card:nth-child(3n) .amoeba-float { animation-delay: -4s; }
 
