@@ -142,9 +142,9 @@ const HajjPackages = () => {
       {/* Packages grid */}
       <div className="relative py-20 md:py-28 overflow-hidden bg-gradient-to-b from-secondary/40 via-background to-emerald-50/40">
         {/* Decorative background blobs */}
-        <span className="amoeba-blob-wild pointer-events-none absolute -top-20 -left-20 w-96 h-96 bg-[radial-gradient(circle_at_30%_30%,hsl(152_60%_45%/0.25),transparent_70%)] blur-2xl" />
-        <span className="amoeba-blob-wild pointer-events-none absolute top-1/3 -right-32 w-[28rem] h-[28rem] bg-[radial-gradient(circle_at_50%_50%,hsl(152_45%_25%/0.2),transparent_70%)] blur-2xl" style={{ animationDelay: "-4s" }} />
-        <span className="amoeba-blob-wild pointer-events-none absolute -bottom-20 left-1/4 w-80 h-80 bg-[radial-gradient(circle_at_50%_50%,hsl(140_55%_55%/0.18),transparent_70%)] blur-2xl" style={{ animationDelay: "-7s" }} />
+        <span className="pointer-events-none absolute -top-20 -left-20 w-96 h-96 rounded-[62%_38%_54%_46%/48%_56%_44%_52%] bg-[radial-gradient(circle_at_30%_30%,hsl(152_60%_45%/0.25),transparent_70%)] blur-2xl" />
+        <span className="pointer-events-none absolute top-1/3 -right-32 w-[28rem] h-[28rem] rounded-[40%_60%_70%_30%/50%_30%_70%_50%] bg-[radial-gradient(circle_at_50%_50%,hsl(152_45%_25%/0.2),transparent_70%)] blur-2xl" />
+        <span className="pointer-events-none absolute -bottom-20 left-1/4 w-80 h-80 rounded-[70%_30%_46%_54%/38%_62%_38%_62%] bg-[radial-gradient(circle_at_50%_50%,hsl(140_55%_55%/0.18),transparent_70%)] blur-2xl" />
 
         <div className="relative container mx-auto px-4">
           <div className="text-center mb-14">
@@ -173,11 +173,11 @@ const HajjPackages = () => {
               return (
                 <article
                   key={pkg.title}
-                  className="group amoeba-float relative flex flex-col rounded-[2rem] bg-card/80 backdrop-blur-sm border border-primary/10 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-hover)] transition-all duration-500 hover:-translate-y-3 p-6 overflow-visible"
+                  className="group relative flex flex-col rounded-[2rem] bg-card/80 backdrop-blur-sm border border-primary/10 shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-hover)] transition-all duration-500 hover:-translate-y-3 p-6 overflow-visible"
                 >
                   {/* Creative geometric decorations — green palette */}
-                  <span className="amoeba-spin-slow pointer-events-none absolute -top-6 -right-6 w-20 h-20 border-2 border-dashed border-primary/30 rounded-full" />
-                  <span className="amoeba-spin-reverse pointer-events-none absolute -bottom-4 -left-4 w-14 h-14 border border-accent/40 rounded-[40%_60%_60%_40%/50%_40%_60%_50%]" />
+                  <span className="pointer-events-none absolute -top-6 -right-6 w-20 h-20 border-2 border-dashed border-primary/30 rounded-full" />
+                  <span className="pointer-events-none absolute -bottom-4 -left-4 w-14 h-14 border border-accent/40 rounded-[40%_60%_60%_40%/50%_40%_60%_50%]" />
                   <span
                     className="pointer-events-none absolute top-12 -right-2 w-4 h-4 bg-emerald-500/40"
                     style={{ clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)" }}
@@ -201,14 +201,14 @@ const HajjPackages = () => {
                   {/* Amoeba image with green-shaded shape-shifting blobs */}
                   <div className="relative z-10 mx-auto w-full">
                     <div className="relative aspect-square">
-                      {/* Main green gradient morphing blob */}
-                      <span className="amoeba-blob-wild pointer-events-none absolute -inset-6 bg-[linear-gradient(135deg,hsl(152_55%_30%)_0%,hsl(140_60%_45%)_50%,hsl(165_70%_55%)_100%)] opacity-95 shadow-[0_10px_40px_-10px_hsl(152_50%_30%/0.5)]" />
+                      {/* Main green gradient blob (static) */}
+                      <span className="pointer-events-none absolute -inset-6 rounded-[62%_38%_54%_46%/48%_56%_44%_52%] bg-[linear-gradient(135deg,hsl(152_55%_30%)_0%,hsl(140_60%_45%)_50%,hsl(165_70%_55%)_100%)] opacity-95 shadow-[0_10px_40px_-10px_hsl(152_50%_30%/0.5)]" />
 
-                      {/* Secondary morphing accent blobs in deeper greens */}
-                      <span className="amoeba-blob-wild pointer-events-none absolute -top-7 -right-8 w-24 h-24 bg-[linear-gradient(135deg,hsl(160_70%_40%),hsl(145_65%_50%))] opacity-90" style={{ animationDelay: "-2s" }} />
-                      <span className="amoeba-blob-wild pointer-events-none absolute -bottom-6 -left-7 w-20 h-20 bg-[linear-gradient(135deg,hsl(170_75%_45%),hsl(152_60%_35%))] opacity-90" style={{ animationDelay: "-4s" }} />
-                      <span className="amoeba-blob-accent pointer-events-none absolute top-1/3 -left-8 w-12 h-12 bg-[linear-gradient(135deg,hsl(85_70%_55%),hsl(140_65%_50%))] opacity-90" style={{ animationDelay: "-3s" }} />
-                      <span className="amoeba-blob-accent pointer-events-none absolute -bottom-3 right-2 w-10 h-10 bg-[linear-gradient(135deg,hsl(45_85%_60%),hsl(140_60%_50%))] opacity-85" style={{ animationDelay: "-5s" }} />
+                      {/* Secondary accent blobs in deeper greens (static) */}
+                      <span className="pointer-events-none absolute -top-7 -right-8 w-24 h-24 rounded-[70%_30%_46%_54%/38%_62%_38%_62%] bg-[linear-gradient(135deg,hsl(160_70%_40%),hsl(145_65%_50%))] opacity-90" />
+                      <span className="pointer-events-none absolute -bottom-6 -left-7 w-20 h-20 rounded-[40%_60%_70%_30%/50%_30%_70%_50%] bg-[linear-gradient(135deg,hsl(170_75%_45%),hsl(152_60%_35%))] opacity-90" />
+                      <span className="pointer-events-none absolute top-1/3 -left-8 w-12 h-12 rounded-[60%_40%_30%_70%/50%_60%_40%_50%] bg-[linear-gradient(135deg,hsl(85_70%_55%),hsl(140_65%_50%))] opacity-90" />
+                      <span className="pointer-events-none absolute -bottom-3 right-2 w-10 h-10 rounded-[50%_50%_70%_30%/40%_60%_40%_60%] bg-[linear-gradient(135deg,hsl(45_85%_60%),hsl(140_60%_50%))] opacity-85" />
 
                       {/* Decorative micro elements */}
                       <span className="pointer-events-none absolute -top-3 left-1/3 w-5 h-5 rounded-full border-2 border-emerald-300/90" />
@@ -217,7 +217,7 @@ const HajjPackages = () => {
                       <span className="pointer-events-none absolute -bottom-1 left-4 w-1.5 h-1.5 rounded-full bg-emerald-300" />
 
                       {/* The image inside organic morphing frame */}
-                      <div className="amoeba-img relative w-full h-full overflow-hidden bg-muted ring-4 ring-background shadow-2xl">
+                      <div className="relative w-full h-full overflow-hidden rounded-[58%_42%_47%_53%/52%_44%_56%_48%] bg-muted ring-4 ring-background shadow-2xl">
                         <img
                           src={pkg.image}
                           alt={pkg.title}
