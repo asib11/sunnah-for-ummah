@@ -217,15 +217,15 @@ const HajjPackages = () => {
                         <span className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-primary/0 via-primary/0 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       </div>
 
-                      {/* Orbit ring 1 — outer, clockwise, 3 mini product blobs */}
-                      <div className="pointer-events-none absolute inset-[-22px] orbit-container">
+                      {/* Orbit ring 1 — outer, clockwise, 3 mini product blobs OUTSIDE main circle */}
+                      <div className="pointer-events-none absolute inset-0 orbit-container">
                         {[0, 120, 240].map((angle, i) => {
                           const orbitImg = packages[(idx + i + 1) % packages.length].image;
                           return (
                             <div
                               key={`o1-${i}`}
-                              className="absolute top-1/2 left-1/2 w-12 h-12"
-                              style={{ transform: `rotate(${angle}deg) translate(0, calc(-50% - 50%)) translate(-50%, -50%)` }}
+                              className="absolute top-1/2 left-1/2 w-12 h-12 -ml-6 -mt-6"
+                              style={{ transform: `rotate(${angle}deg) translateY(calc(-50% - 70%)) rotate(-${angle}deg)` }}
                             >
                               <div className="orbit-item w-full h-full rounded-[58%_42%_47%_53%/52%_44%_56%_48%] overflow-hidden ring-[1.5px] ring-emerald-400/70 shadow-md bg-card">
                                 <img src={orbitImg} alt="" loading="lazy" className="w-full h-full object-cover" />
@@ -235,15 +235,15 @@ const HajjPackages = () => {
                         })}
                       </div>
 
-                      {/* Orbit ring 2 — inner-tight, counter-clockwise, 2 smaller product blobs */}
-                      <div className="pointer-events-none absolute inset-[-6px] orbit-container-reverse">
+                      {/* Orbit ring 2 — further out, counter-clockwise, 2 smaller product blobs */}
+                      <div className="pointer-events-none absolute inset-0 orbit-container-reverse">
                         {[60, 240].map((angle, i) => {
                           const orbitImg = packages[(idx + i + 3) % packages.length].image;
                           return (
                             <div
                               key={`o2-${i}`}
-                              className="absolute top-1/2 left-1/2 w-8 h-8"
-                              style={{ transform: `rotate(${angle}deg) translate(0, calc(-50% - 50%)) translate(-50%, -50%)` }}
+                              className="absolute top-1/2 left-1/2 w-8 h-8 -ml-4 -mt-4"
+                              style={{ transform: `rotate(${angle}deg) translateY(calc(-50% - 90%)) rotate(-${angle}deg)` }}
                             >
                               <div className="orbit-item-reverse w-full h-full rounded-[60%_40%_50%_50%/45%_55%_45%_55%] overflow-hidden ring-[1.5px] ring-lime-400/70 shadow bg-card">
                                 <img src={orbitImg} alt="" loading="lazy" className="w-full h-full object-cover" />
