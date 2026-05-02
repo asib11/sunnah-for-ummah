@@ -217,7 +217,7 @@ const HajjPackages = () => {
                       <span className="pointer-events-none absolute -bottom-1 left-4 w-1.5 h-1.5 rounded-full bg-emerald-300" />
 
                       {/* The image inside organic morphing frame */}
-                      <div className="amoeba-img relative w-full h-full overflow-hidden bg-muted ring-4 ring-background shadow-2xl">
+                      <div className="relative w-full h-full overflow-hidden rounded-[58%_42%_47%_53%/52%_44%_56%_48%] bg-muted ring-4 ring-background shadow-2xl">
                         <img
                           src={pkg.image}
                           alt={pkg.title}
