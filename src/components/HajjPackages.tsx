@@ -253,10 +253,7 @@ const HajjPackages = () => {
                                 className="absolute top-1/2 left-1/2 w-10 h-10 -ml-5 -mt-5"
                                 style={{ transform: `rotate(${angle}deg) translateY(-100%)` }}
                               >
-                                <div
-                                  className="orbit-item-reverse w-full h-full rounded-[60%_40%_50%_50%/45%_55%_45%_55%] overflow-hidden ring-[1.5px] ring-lime-400/80 shadow bg-card"
-                                  style={{ transform: `rotate(-${angle}deg)` }}
-                                >
+                                <div className="w-full h-full rounded-[60%_40%_50%_50%/45%_55%_45%_55%] overflow-hidden ring-[1.5px] ring-lime-400/80 shadow bg-card">
                                   <img src={orbitImg} alt="" loading="lazy" className="w-full h-full object-cover" />
                                 </div>
                               </div>
