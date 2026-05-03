@@ -223,39 +223,49 @@ const HajjPackages = () => {
                       </div>
 
                       {/* Orbit ring 1 — inner planet ring, clockwise, 3 planets OUTSIDE the sun */}
-                      <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[155%] h-[155%] orbit-container">
-                        {[0, 120, 240].map((angle, i) => {
-                          const orbitImg = packages[(idx + i + 1) % packages.length].image;
-                          return (
-                            <div
-                              key={`o1-${i}`}
-                              className="absolute top-1/2 left-1/2 w-14 h-14 -ml-7 -mt-7"
-                              style={{ transform: `rotate(${angle}deg) translateY(-50%) translateY(-50%)` }}
-                            >
-                              <div className="orbit-item w-full h-full rounded-[58%_42%_47%_53%/52%_44%_56%_48%] overflow-hidden ring-[1.5px] ring-emerald-400/80 shadow-md bg-card">
-                                <img src={orbitImg} alt="" loading="lazy" className="w-full h-full object-cover" />
+                      <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[155%] h-[155%]">
+                        <div className="absolute inset-0 orbit-container">
+                          {[0, 120, 240].map((angle, i) => {
+                            const orbitImg = packages[(idx + i + 1) % packages.length].image;
+                            return (
+                              <div
+                                key={`o1-${i}`}
+                                className="absolute top-1/2 left-1/2 w-14 h-14 -ml-7 -mt-7"
+                                style={{ transform: `rotate(${angle}deg) translateY(-77.5%)` }}
+                              >
+                                <div
+                                  className="orbit-item w-full h-full rounded-[58%_42%_47%_53%/52%_44%_56%_48%] overflow-hidden ring-[1.5px] ring-emerald-400/80 shadow-md bg-card"
+                                  style={{ transform: `rotate(-${angle}deg)` }}
+                                >
+                                  <img src={orbitImg} alt="" loading="lazy" className="w-full h-full object-cover" />
+                                </div>
                               </div>
-                            </div>
-                          );
-                        })}
+                            );
+                          })}
+                        </div>
                       </div>
 
                       {/* Orbit ring 2 — outer planet ring, counter-clockwise, 2 smaller planets */}
-                      <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] orbit-container-reverse">
-                        {[60, 240].map((angle, i) => {
-                          const orbitImg = packages[(idx + i + 3) % packages.length].image;
-                          return (
-                            <div
-                              key={`o2-${i}`}
-                              className="absolute top-1/2 left-1/2 w-10 h-10 -ml-5 -mt-5"
-                              style={{ transform: `rotate(${angle}deg) translateY(-50%) translateY(-50%)` }}
-                            >
-                              <div className="orbit-item-reverse w-full h-full rounded-[60%_40%_50%_50%/45%_55%_45%_55%] overflow-hidden ring-[1.5px] ring-lime-400/80 shadow bg-card">
-                                <img src={orbitImg} alt="" loading="lazy" className="w-full h-full object-cover" />
+                      <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%]">
+                        <div className="absolute inset-0 orbit-container-reverse">
+                          {[60, 240].map((angle, i) => {
+                            const orbitImg = packages[(idx + i + 3) % packages.length].image;
+                            return (
+                              <div
+                                key={`o2-${i}`}
+                                className="absolute top-1/2 left-1/2 w-10 h-10 -ml-5 -mt-5"
+                                style={{ transform: `rotate(${angle}deg) translateY(-100%)` }}
+                              >
+                                <div
+                                  className="orbit-item-reverse w-full h-full rounded-[60%_40%_50%_50%/45%_55%_45%_55%] overflow-hidden ring-[1.5px] ring-lime-400/80 shadow bg-card"
+                                  style={{ transform: `rotate(-${angle}deg)` }}
+                                >
+                                  <img src={orbitImg} alt="" loading="lazy" className="w-full h-full object-cover" />
+                                </div>
                               </div>
-                            </div>
-                          );
-                        })}
+                            );
+                          })}
+                        </div>
                       </div>
                     </div>
                   </div>
