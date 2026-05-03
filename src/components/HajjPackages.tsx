@@ -198,13 +198,18 @@ const HajjPackages = () => {
                     </span>
                   )}
 
-                  {/* Amoeba image with thin green border + orbiting mini product blobs */}
+                  {/* Solar-system: sun (main product) with two orbiting planet rings */}
                   <div className="relative z-10 mx-auto w-full">
-                    <div className="relative aspect-square">
-                      {/* Soft green gradient backdrop (thin, subtle) */}
+                    {/* Outer wrapper expanded so orbits sit OUTSIDE the main circle */}
+                    <div className="relative aspect-square scale-[0.62]">
+                      {/* Visible orbit paths (dashed rings) — like planetary trajectories */}
+                      <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[155%] h-[155%] rounded-full border border-dashed border-emerald-500/30" />
+                      <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] rounded-full border border-dashed border-emerald-400/25" />
+
+                      {/* Soft green gradient backdrop */}
                       <span className="pointer-events-none absolute -inset-3 rounded-[62%_38%_54%_46%/48%_56%_44%_52%] bg-[linear-gradient(135deg,hsl(152_55%_30%/0.18)_0%,hsl(140_60%_45%/0.18)_50%,hsl(165_70%_55%/0.18)_100%)]" />
 
-                      {/* The image inside organic morphing frame — THIN green border */}
+                      {/* The "sun" — main product image */}
                       <div className="relative w-full h-full overflow-hidden rounded-[58%_42%_47%_53%/52%_44%_56%_48%] bg-muted ring-[1.5px] ring-emerald-500/70 shadow-[0_8px_30px_-8px_hsl(152_50%_30%/0.4)]">
                         <img
                           src={pkg.image}
@@ -217,17 +222,17 @@ const HajjPackages = () => {
                         <span className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-primary/0 via-primary/0 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       </div>
 
-                      {/* Orbit ring 1 — outer, clockwise, 3 mini product blobs OUTSIDE main circle */}
-                      <div className="pointer-events-none absolute inset-0 orbit-container">
+                      {/* Orbit ring 1 — inner planet ring, clockwise, 3 planets OUTSIDE the sun */}
+                      <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[155%] h-[155%] orbit-container">
                         {[0, 120, 240].map((angle, i) => {
                           const orbitImg = packages[(idx + i + 1) % packages.length].image;
                           return (
                             <div
                               key={`o1-${i}`}
-                              className="absolute top-1/2 left-1/2 w-12 h-12 -ml-6 -mt-6"
-                              style={{ transform: `rotate(${angle}deg) translateY(calc(-50% - 70%)) rotate(-${angle}deg)` }}
+                              className="absolute top-1/2 left-1/2 w-14 h-14 -ml-7 -mt-7"
+                              style={{ transform: `rotate(${angle}deg) translateY(-50%) translateY(-50%)` }}
                             >
-                              <div className="orbit-item w-full h-full rounded-[58%_42%_47%_53%/52%_44%_56%_48%] overflow-hidden ring-[1.5px] ring-emerald-400/70 shadow-md bg-card">
+                              <div className="orbit-item w-full h-full rounded-[58%_42%_47%_53%/52%_44%_56%_48%] overflow-hidden ring-[1.5px] ring-emerald-400/80 shadow-md bg-card">
                                 <img src={orbitImg} alt="" loading="lazy" className="w-full h-full object-cover" />
                               </div>
                             </div>
@@ -235,27 +240,23 @@ const HajjPackages = () => {
                         })}
                       </div>
 
-                      {/* Orbit ring 2 — further out, counter-clockwise, 2 smaller product blobs */}
-                      <div className="pointer-events-none absolute inset-0 orbit-container-reverse">
+                      {/* Orbit ring 2 — outer planet ring, counter-clockwise, 2 smaller planets */}
+                      <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] orbit-container-reverse">
                         {[60, 240].map((angle, i) => {
                           const orbitImg = packages[(idx + i + 3) % packages.length].image;
                           return (
                             <div
                               key={`o2-${i}`}
-                              className="absolute top-1/2 left-1/2 w-8 h-8 -ml-4 -mt-4"
-                              style={{ transform: `rotate(${angle}deg) translateY(calc(-50% - 90%)) rotate(-${angle}deg)` }}
+                              className="absolute top-1/2 left-1/2 w-10 h-10 -ml-5 -mt-5"
+                              style={{ transform: `rotate(${angle}deg) translateY(-50%) translateY(-50%)` }}
                             >
-                              <div className="orbit-item-reverse w-full h-full rounded-[60%_40%_50%_50%/45%_55%_45%_55%] overflow-hidden ring-[1.5px] ring-lime-400/70 shadow bg-card">
+                              <div className="orbit-item-reverse w-full h-full rounded-[60%_40%_50%_50%/45%_55%_45%_55%] overflow-hidden ring-[1.5px] ring-lime-400/80 shadow bg-card">
                                 <img src={orbitImg} alt="" loading="lazy" className="w-full h-full object-cover" />
                               </div>
                             </div>
                           );
                         })}
                       </div>
-
-                      {/* Tiny decorative dots */}
-                      <span className="pointer-events-none absolute top-2 -right-1 w-1.5 h-1.5 rounded-full bg-lime-400" />
-                      <span className="pointer-events-none absolute -bottom-1 left-6 w-1.5 h-1.5 rounded-full bg-emerald-300" />
                     </div>
                   </div>
 
