@@ -198,17 +198,17 @@ const HajjPackages = () => {
                     </span>
                   )}
 
-                  {/* Solar-system: sun (main product) with two orbiting planet rings — all contained inside the card radius */}
+                  {/* Solar-system: sun (main product) with two orbiting planet rings — planets sit OUTSIDE the card */}
                   <div className="relative z-10 mx-auto w-full aspect-square">
-                    {/* Visible orbit paths (dashed rings) — sit OUTSIDE the sun image */}
-                    <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[72%] h-[72%] rounded-full border border-dashed border-emerald-500/30" />
-                    <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[96%] h-[96%] rounded-full border border-dashed border-emerald-400/25" />
+                    {/* Visible orbit paths (dashed rings) — extend beyond card edges */}
+                    <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[125%] h-[125%] rounded-full border border-dashed border-emerald-500/30" />
+                    <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[155%] h-[155%] rounded-full border border-dashed border-emerald-400/25" />
 
                     {/* Soft green gradient backdrop behind the sun */}
-                    <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[50%] h-[50%] rounded-[62%_38%_54%_46%/48%_56%_44%_52%] bg-[linear-gradient(135deg,hsl(152_55%_30%/0.18)_0%,hsl(140_60%_45%/0.18)_50%,hsl(165_70%_55%/0.18)_100%)]" />
+                    <span className="pointer-events-none absolute -inset-3 rounded-[62%_38%_54%_46%/48%_56%_44%_52%] bg-[linear-gradient(135deg,hsl(152_55%_30%/0.18)_0%,hsl(140_60%_45%/0.18)_50%,hsl(165_70%_55%/0.18)_100%)]" />
 
-                    {/* The "sun" — main product image (smaller so planets fully outside) */}
-                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[46%] h-[46%] overflow-hidden rounded-[58%_42%_47%_53%/52%_44%_56%_48%] bg-muted ring-[1.5px] ring-emerald-500/70 shadow-[0_8px_30px_-8px_hsl(152_50%_30%/0.4)]">
+                    {/* The "sun" — main product image fills the slot */}
+                    <div className="relative w-full h-full overflow-hidden rounded-[58%_42%_47%_53%/52%_44%_56%_48%] bg-muted ring-[1.5px] ring-emerald-500/70 shadow-[0_8px_30px_-8px_hsl(152_50%_30%/0.4)]">
                       <img
                         src={pkg.image}
                         alt={pkg.title}
@@ -220,15 +220,15 @@ const HajjPackages = () => {
                       <span className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-primary/0 via-primary/0 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
 
-                    {/* Orbit ring 1 — inner, clockwise, 3 planets (kept inside card) */}
-                    <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[72%] h-[72%]">
+                    {/* Orbit ring 1 — inner, clockwise, 3 planets OUTSIDE the card */}
+                    <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[125%] h-[125%] z-20">
                       <div className="absolute inset-0 orbit-container">
                         {[0, 120, 240].map((angle, i) => {
                           const orbitImg = packages[(idx + i + 1) % packages.length].image;
                           return (
                             <div
                               key={`o1-${i}`}
-                              className="absolute top-1/2 left-1/2 w-10 h-10 -ml-5 -mt-5"
+                              className="absolute top-1/2 left-1/2 w-12 h-12 -ml-6 -mt-6"
                               style={{ transform: `rotate(${angle}deg) translateY(-50%)` }}
                             >
                               <div className="w-full h-full rounded-[58%_42%_47%_53%/52%_44%_56%_48%] overflow-hidden ring-[1.5px] ring-emerald-400/80 shadow-md bg-card">
@@ -240,15 +240,15 @@ const HajjPackages = () => {
                       </div>
                     </div>
 
-                    {/* Orbit ring 2 — outer, counter-clockwise, 2 smaller planets (still inside card) */}
-                    <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[96%] h-[96%]">
+                    {/* Orbit ring 2 — outer, counter-clockwise, 2 smaller planets further OUTSIDE */}
+                    <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[155%] h-[155%] z-20">
                       <div className="absolute inset-0 orbit-container-reverse">
                         {[60, 240].map((angle, i) => {
                           const orbitImg = packages[(idx + i + 3) % packages.length].image;
                           return (
                             <div
                               key={`o2-${i}`}
-                              className="absolute top-1/2 left-1/2 w-8 h-8 -ml-4 -mt-4"
+                              className="absolute top-1/2 left-1/2 w-9 h-9 -ml-[1.125rem] -mt-[1.125rem]"
                               style={{ transform: `rotate(${angle}deg) translateY(-50%)` }}
                             >
                               <div className="w-full h-full rounded-[60%_40%_50%_50%/45%_55%_45%_55%] overflow-hidden ring-[1.5px] ring-lime-400/80 shadow bg-card">
