@@ -228,7 +228,7 @@ const HajjPackages = () => {
                           return (
                             <div
                               key={`o1-${i}`}
-                              className="absolute top-1/2 left-1/2 w-12 h-12 -ml-6 -mt-6"
+                              className="absolute top-1/2 left-1/2 w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 -ml-4 -mt-4 sm:-ml-5 sm:-mt-5 lg:-ml-6 lg:-mt-6"
                               style={{ transform: `rotate(${angle}deg) translateY(-50%)` }}
                             >
                               <div className="w-full h-full rounded-[58%_42%_47%_53%/52%_44%_56%_48%] overflow-hidden ring-[1.5px] ring-emerald-400/80 shadow-md bg-card">
