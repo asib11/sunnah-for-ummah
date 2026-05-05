@@ -201,8 +201,8 @@ const HajjPackages = () => {
                   {/* Solar-system: sun (main product) with two orbiting planet rings — planets sit OUTSIDE the card */}
                   <div className="relative z-10 mx-auto w-full aspect-square">
                     {/* Visible orbit paths (dashed rings) — extend beyond card edges */}
-                    <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[170%] h-[170%] rounded-full border border-dashed border-emerald-500/30" />
-                    <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[210%] h-[210%] rounded-full border border-dashed border-emerald-400/25" />
+                    <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] sm:w-[155%] sm:h-[155%] lg:w-[170%] lg:h-[170%] rounded-full border border-dashed border-emerald-500/30" />
+                    <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[170%] h-[170%] sm:w-[190%] sm:h-[190%] lg:w-[210%] lg:h-[210%] rounded-full border border-dashed border-emerald-400/25" />}
 
                     {/* Soft green gradient backdrop behind the sun */}
                     <span className="pointer-events-none absolute -inset-3 rounded-[62%_38%_54%_46%/48%_56%_44%_52%] bg-[linear-gradient(135deg,hsl(152_55%_30%/0.18)_0%,hsl(140_60%_45%/0.18)_50%,hsl(165_70%_55%/0.18)_100%)]" />
