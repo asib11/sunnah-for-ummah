@@ -201,8 +201,8 @@ const HajjPackages = () => {
                   {/* Solar-system: sun (main product) with two orbiting planet rings — planets sit OUTSIDE the card */}
                   <div className="relative z-10 mx-auto w-full aspect-square">
                     {/* Visible orbit paths (dashed rings) — extend beyond card edges */}
-                    <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] rounded-full border border-dashed border-emerald-500/30" />
-                    <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[180%] h-[180%] rounded-full border border-dashed border-emerald-400/25" />
+                    <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[170%] h-[170%] rounded-full border border-dashed border-emerald-500/30" />
+                    <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[210%] h-[210%] rounded-full border border-dashed border-emerald-400/25" />
 
                     {/* Soft green gradient backdrop behind the sun */}
                     <span className="pointer-events-none absolute -inset-3 rounded-[62%_38%_54%_46%/48%_56%_44%_52%] bg-[linear-gradient(135deg,hsl(152_55%_30%/0.18)_0%,hsl(140_60%_45%/0.18)_50%,hsl(165_70%_55%/0.18)_100%)]" />
@@ -221,7 +221,7 @@ const HajjPackages = () => {
                     </div>
 
                     {/* Orbit ring 1 — inner, clockwise, 3 planets OUTSIDE the card */}
-                    <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-[150%] z-20">
+                    <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[170%] h-[170%] z-20">
                       <div className="absolute inset-0 orbit-container">
                         {[0, 120, 240].map((angle, i) => {
                           const orbitImg = packages[(idx + i + 1) % packages.length].image;
@@ -241,7 +241,7 @@ const HajjPackages = () => {
                     </div>
 
                     {/* Orbit ring 2 — outer, counter-clockwise, 2 smaller planets further OUTSIDE */}
-                    <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[180%] h-[180%] z-20">
+                    <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[210%] h-[210%] z-20">
                       <div className="absolute inset-0 orbit-container-reverse">
                         {[60, 240].map((angle, i) => {
                           const orbitImg = packages[(idx + i + 3) % packages.length].image;
