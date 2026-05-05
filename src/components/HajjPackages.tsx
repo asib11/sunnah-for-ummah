@@ -241,7 +241,7 @@ const HajjPackages = () => {
                     </div>
 
                     {/* Orbit ring 2 — outer, counter-clockwise, 2 smaller planets further OUTSIDE */}
-                    <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[210%] h-[210%] z-20">
+                    <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[170%] h-[170%] sm:w-[190%] sm:h-[190%] lg:w-[210%] lg:h-[210%] z-20">
                       <div className="absolute inset-0 orbit-container-reverse">
                         {[60, 240].map((angle, i) => {
                           const orbitImg = packages[(idx + i + 3) % packages.length].image;
