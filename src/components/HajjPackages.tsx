@@ -201,8 +201,8 @@ const HajjPackages = () => {
                   {/* Solar-system: sun (main product) with two orbiting planet rings — planets sit OUTSIDE the card */}
                   <div className="relative z-10 mx-auto w-full aspect-square">
                     {/* Visible orbit paths (dashed rings) — extend beyond card edges */}
-                    <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[170%] h-[170%] rounded-full border border-dashed border-emerald-500/30" />
-                    <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[210%] h-[210%] rounded-full border border-dashed border-emerald-400/25" />
+                    <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] sm:w-[155%] sm:h-[155%] lg:w-[170%] lg:h-[170%] rounded-full border border-dashed border-emerald-500/30" />
+                    <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[170%] h-[170%] sm:w-[190%] sm:h-[190%] lg:w-[210%] lg:h-[210%] rounded-full border border-dashed border-emerald-400/25" />
 
                     {/* Soft green gradient backdrop behind the sun */}
                     <span className="pointer-events-none absolute -inset-3 rounded-[62%_38%_54%_46%/48%_56%_44%_52%] bg-[linear-gradient(135deg,hsl(152_55%_30%/0.18)_0%,hsl(140_60%_45%/0.18)_50%,hsl(165_70%_55%/0.18)_100%)]" />
@@ -221,14 +221,14 @@ const HajjPackages = () => {
                     </div>
 
                     {/* Orbit ring 1 — inner, clockwise, 3 planets OUTSIDE the card */}
-                    <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[170%] h-[170%] z-20">
+                    <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] sm:w-[155%] sm:h-[155%] lg:w-[170%] lg:h-[170%] z-20">
                       <div className="absolute inset-0 orbit-container">
                         {[0, 120, 240].map((angle, i) => {
                           const orbitImg = packages[(idx + i + 1) % packages.length].image;
                           return (
                             <div
                               key={`o1-${i}`}
-                              className="absolute top-1/2 left-1/2 w-12 h-12 -ml-6 -mt-6"
+                              className="absolute top-1/2 left-1/2 w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 -ml-4 -mt-4 sm:-ml-5 sm:-mt-5 lg:-ml-6 lg:-mt-6"
                               style={{ transform: `rotate(${angle}deg) translateY(-50%)` }}
                             >
                               <div className="w-full h-full rounded-[58%_42%_47%_53%/52%_44%_56%_48%] overflow-hidden ring-[1.5px] ring-emerald-400/80 shadow-md bg-card">
@@ -241,14 +241,14 @@ const HajjPackages = () => {
                     </div>
 
                     {/* Orbit ring 2 — outer, counter-clockwise, 2 smaller planets further OUTSIDE */}
-                    <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[210%] h-[210%] z-20">
+                    <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[170%] h-[170%] sm:w-[190%] sm:h-[190%] lg:w-[210%] lg:h-[210%] z-20">
                       <div className="absolute inset-0 orbit-container-reverse">
                         {[60, 240].map((angle, i) => {
                           const orbitImg = packages[(idx + i + 3) % packages.length].image;
                           return (
                             <div
                               key={`o2-${i}`}
-                              className="absolute top-1/2 left-1/2 w-9 h-9 -ml-[1.125rem] -mt-[1.125rem]"
+                              className="absolute top-1/2 left-1/2 w-6 h-6 sm:w-8 sm:h-8 lg:w-9 lg:h-9 -ml-3 -mt-3 sm:-ml-4 sm:-mt-4 lg:-ml-[1.125rem] lg:-mt-[1.125rem]"
                               style={{ transform: `rotate(${angle}deg) translateY(-50%)` }}
                             >
                               <div className="w-full h-full rounded-[60%_40%_50%_50%/45%_55%_45%_55%] overflow-hidden ring-[1.5px] ring-lime-400/80 shadow bg-card">
