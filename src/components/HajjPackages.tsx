@@ -244,14 +244,14 @@ const HajjPackages = () => {
                     </div>
 
                     {/* The main morphing blob */}
-                    <div className="relative w-full h-full overflow-hidden amoeba-blob bg-muted ring-2 ring-emerald-500/70 shadow-[0_15px_45px_-10px_hsl(152_50%_30%/0.55)] group-hover:ring-accent transition-all duration-500">
+                    <div className="relative w-full h-full overflow-hidden rounded-full bg-muted ring-2 ring-emerald-500/70 shadow-[0_15px_45px_-10px_hsl(152_50%_30%/0.55)] group-hover:ring-accent transition-all duration-500">
                       <img
                         src={pkg.image}
                         alt={pkg.title}
                         loading="lazy"
                         width={800}
                         height={800}
-                        className="absolute inset-0 w-full h-full object-contain p-4 transition-transform duration-700 group-hover:scale-105"
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                       {/* Shimmer sweep on hover */}
                       <span className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
