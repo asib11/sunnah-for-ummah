@@ -198,17 +198,53 @@ const HajjPackages = () => {
                     </span>
                   )}
 
-                  {/* Solar-system: sun (main product) with two orbiting planet rings — planets sit OUTSIDE the card */}
+                  {/* Creative morphing main blob with glow, rotating ring & sparkles */}
                   <div className="relative z-10 mx-auto w-full aspect-square">
-                    {/* Visible orbit paths (dashed rings) — extend beyond card edges */}
-                    <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] sm:w-[155%] sm:h-[155%] lg:w-[170%] lg:h-[170%] rounded-full border border-dashed border-emerald-500/30" />
-                    <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[170%] h-[170%] sm:w-[190%] sm:h-[190%] lg:w-[210%] lg:h-[210%] rounded-full border border-dashed border-emerald-400/25" />
+                    {/* Outer glow halo */}
+                    <span className="pointer-events-none absolute -inset-6 rounded-full bg-[radial-gradient(circle,hsl(152_70%_50%/0.35)_0%,hsl(140_60%_45%/0.15)_45%,transparent_75%)] blur-2xl animate-pulse" />
 
-                    {/* Soft green gradient backdrop behind the sun */}
-                    <span className="pointer-events-none absolute -inset-3 rounded-[62%_38%_54%_46%/48%_56%_44%_52%] bg-[linear-gradient(135deg,hsl(152_55%_30%/0.18)_0%,hsl(140_60%_45%/0.18)_50%,hsl(165_70%_55%/0.18)_100%)]" />
+                    {/* Rotating dashed orbit ring */}
+                    <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[115%] h-[115%] rounded-full border border-dashed border-emerald-500/40 amoeba-spin-slow" />
+                    {/* Counter-rotating thin ring */}
+                    <span className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[108%] h-[108%] rounded-full border border-emerald-400/20 [animation:amoeba-spin_30s_linear_infinite_reverse]" />
 
-                    {/* The "sun" — main product image fills the slot */}
-                    <div className="relative w-full h-full overflow-hidden rounded-[58%_42%_47%_53%/52%_44%_56%_48%] bg-muted ring-[1.5px] ring-emerald-500/70 shadow-[0_8px_30px_-8px_hsl(152_50%_30%/0.4)]">
+                    {/* Soft morphing gradient backdrop */}
+                    <span className="pointer-events-none absolute -inset-3 bg-[linear-gradient(135deg,hsl(152_55%_30%/0.25)_0%,hsl(140_60%_45%/0.22)_50%,hsl(165_70%_55%/0.25)_100%)] amoeba-blob-bg" />
+
+                    {/* Orbiting accent dots/sparkles around the blob */}
+                    <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[115%] h-[115%] orbit-container">
+                      {[0, 72, 144, 216, 288].map((angle, i) => (
+                        <div
+                          key={`dot-${i}`}
+                          className="absolute top-1/2 left-1/2"
+                          style={{ transform: `rotate(${angle}deg) translateY(-50%)` }}
+                        >
+                          <span
+                            className={`block rounded-full shadow-[0_0_10px_hsl(152_70%_50%/0.8)] ${
+                              i % 2 === 0
+                                ? "w-2.5 h-2.5 bg-accent"
+                                : "w-1.5 h-1.5 bg-emerald-400"
+                            }`}
+                          />
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Counter-orbit tiny sparkles */}
+                    <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[108%] h-[108%] orbit-container-reverse">
+                      {[36, 180, 300].map((angle, i) => (
+                        <div
+                          key={`spark-${i}`}
+                          className="absolute top-1/2 left-1/2"
+                          style={{ transform: `rotate(${angle}deg) translateY(-50%)` }}
+                        >
+                          <span className="block w-1 h-1 rounded-full bg-lime-300 shadow-[0_0_8px_hsl(85_90%_60%)]" />
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* The main morphing blob */}
+                    <div className="relative w-full h-full overflow-hidden amoeba-blob bg-muted ring-2 ring-emerald-500/70 shadow-[0_15px_45px_-10px_hsl(152_50%_30%/0.55)] group-hover:ring-accent transition-all duration-500">
                       <img
                         src={pkg.image}
                         alt={pkg.title}
@@ -217,48 +253,16 @@ const HajjPackages = () => {
                         height={800}
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />
-                      <span className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-primary/0 via-primary/0 to-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      {/* Shimmer sweep on hover */}
+                      <span className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+                      {/* Inner color wash */}
+                      <span className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-primary/0 via-primary/0 to-primary/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
 
-                    {/* Orbit ring 1 — inner, clockwise, 3 planets OUTSIDE the card */}
-                    <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] sm:w-[155%] sm:h-[155%] lg:w-[170%] lg:h-[170%] z-20">
-                      <div className="absolute inset-0 orbit-container">
-                        {[0, 120, 240].map((angle, i) => {
-                          const orbitImg = packages[(idx + i + 1) % packages.length].image;
-                          return (
-                            <div
-                              key={`o1-${i}`}
-                              className="absolute top-1/2 left-1/2 w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 -ml-4 -mt-4 sm:-ml-5 sm:-mt-5 lg:-ml-6 lg:-mt-6"
-                              style={{ transform: `rotate(${angle}deg) translateY(-50%)` }}
-                            >
-                              <div className="w-full h-full rounded-[58%_42%_47%_53%/52%_44%_56%_48%] overflow-hidden ring-[1.5px] ring-emerald-400/80 shadow-md bg-card">
-                                <img src={orbitImg} alt="" loading="lazy" className="w-full h-full object-cover" />
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
-
-                    {/* Orbit ring 2 — outer, counter-clockwise, 2 smaller planets further OUTSIDE */}
-                    <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[170%] h-[170%] sm:w-[190%] sm:h-[190%] lg:w-[210%] lg:h-[210%] z-20">
-                      <div className="absolute inset-0 orbit-container-reverse">
-                        {[60, 240].map((angle, i) => {
-                          const orbitImg = packages[(idx + i + 3) % packages.length].image;
-                          return (
-                            <div
-                              key={`o2-${i}`}
-                              className="absolute top-1/2 left-1/2 w-6 h-6 sm:w-8 sm:h-8 lg:w-9 lg:h-9 -ml-3 -mt-3 sm:-ml-4 sm:-mt-4 lg:-ml-[1.125rem] lg:-mt-[1.125rem]"
-                              style={{ transform: `rotate(${angle}deg) translateY(-50%)` }}
-                            >
-                              <div className="w-full h-full rounded-[60%_40%_50%_50%/45%_55%_45%_55%] overflow-hidden ring-[1.5px] ring-lime-400/80 shadow bg-card">
-                                <img src={orbitImg} alt="" loading="lazy" className="w-full h-full object-cover" />
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </div>
+                    {/* Floating accent badge — top right */}
+                    <span className="pointer-events-none absolute -top-1 -right-1 w-8 h-8 rounded-full bg-gradient-to-br from-accent to-amber-400 shadow-lg flex items-center justify-center [animation:amoeba-float_4s_ease-in-out_infinite]">
+                      <Star className="w-4 h-4 fill-white text-white" />
+                    </span>
                   </div>
 
                   {/* Details */}
