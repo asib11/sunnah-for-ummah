@@ -17,6 +17,9 @@ type Package = {
   oldPrice?: number;
   badge?: string;
   image: string;
+  // Satellite product images shown inside the floating circles around the main blob.
+  // Edit these to upload/replace product pictures for each star bubble.
+  satellites?: string[];
 };
 
 const packages: Package[] = [
