@@ -73,7 +73,64 @@ const packages: Package[] = [
   },
 ];
 
+const STORAGE_KEY = "sfu:hajj-satellites";
+
 const HajjPackages = () => {
+  // Per-package satellite overrides: { [pkgTitle]: (string|null)[5] }
+  const [satelliteOverrides, setSatelliteOverrides] = useState<Record<string, (string | null)[]>>(() => {
+    if (typeof window === "undefined") return {};
+    try {
+      const raw = window.localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch {
+      return {};
+    }
+  });
+  const [editing, setEditing] = useState<{ pkg: string; index: number } | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(satelliteOverrides));
+    } catch {
+      /* ignore quota errors */
+    }
+  }, [satelliteOverrides]);
+
+  const getSatellite = (pkg: Package, i: number): string | undefined =>
+    satelliteOverrides[pkg.title]?.[i] ?? pkg.satellites?.[i];
+
+  const openPicker = (pkgTitle: string, index: number) => {
+    setEditing({ pkg: pkgTitle, index });
+    // open after state set
+    setTimeout(() => fileInputRef.current?.click(), 0);
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file || !editing) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const dataUrl = reader.result as string;
+      setSatelliteOverrides((prev) => {
+        const arr = [...(prev[editing.pkg] ?? [null, null, null, null, null])];
+        arr[editing.index] = dataUrl;
+        return { ...prev, [editing.pkg]: arr };
+      });
+      setEditing(null);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const clearSatellite = (pkgTitle: string, i: number) => {
+    setSatelliteOverrides((prev) => {
+      const arr = [...(prev[pkgTitle] ?? [null, null, null, null, null])];
+      arr[i] = null;
+      return { ...prev, [pkgTitle]: arr };
+    });
+  };
+
   return (
     <section className="relative">
       {/* Hero banner */}
