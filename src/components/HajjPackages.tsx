@@ -74,6 +74,9 @@ const packages: Package[] = [
 ];
 
 const STORAGE_KEY = "sfu:hajj-satellites";
+const POS_STORAGE_KEY = "sfu:hajj-satellite-positions";
+
+type Offset = { x: number; y: number };
 
 const HajjPackages = () => {
   // Per-package satellite overrides: { [pkgTitle]: (string|null)[5] }
@@ -86,8 +89,29 @@ const HajjPackages = () => {
       return {};
     }
   });
+
+  // Drag offsets (px) per { [pkgTitle]: Offset[5] }
+  const [satellitePositions, setSatellitePositions] = useState<Record<string, Offset[]>>(() => {
+    if (typeof window === "undefined") return {};
+    try {
+      const raw = window.localStorage.getItem(POS_STORAGE_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch {
+      return {};
+    }
+  });
+
   const [editing, setEditing] = useState<{ pkg: string; index: number } | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const dragRef = useRef<{
+    pkg: string;
+    index: number;
+    startX: number;
+    startY: number;
+    baseX: number;
+    baseY: number;
+    moved: boolean;
+  } | null>(null);
 
   useEffect(() => {
     try {
@@ -97,12 +121,22 @@ const HajjPackages = () => {
     }
   }, [satelliteOverrides]);
 
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(POS_STORAGE_KEY, JSON.stringify(satellitePositions));
+    } catch {
+      /* ignore */
+    }
+  }, [satellitePositions]);
+
   const getSatellite = (pkg: Package, i: number): string | undefined =>
     satelliteOverrides[pkg.title]?.[i] ?? pkg.satellites?.[i];
 
+  const getOffset = (pkgTitle: string, i: number): Offset =>
+    satellitePositions[pkgTitle]?.[i] ?? { x: 0, y: 0 };
+
   const openPicker = (pkgTitle: string, index: number) => {
     setEditing({ pkg: pkgTitle, index });
-    // open after state set
     setTimeout(() => fileInputRef.current?.click(), 0);
   };
 
@@ -129,6 +163,60 @@ const HajjPackages = () => {
       arr[i] = null;
       return { ...prev, [pkgTitle]: arr };
     });
+  };
+
+  const handlePointerDown = (
+    e: React.PointerEvent<HTMLDivElement>,
+    pkgTitle: string,
+    index: number,
+  ) => {
+    const base = getOffset(pkgTitle, index);
+    dragRef.current = {
+      pkg: pkgTitle,
+      index,
+      startX: e.clientX,
+      startY: e.clientY,
+      baseX: base.x,
+      baseY: base.y,
+      moved: false,
+    };
+    (e.currentTarget as HTMLDivElement).setPointerCapture(e.pointerId);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    const d = dragRef.current;
+    if (!d) return;
+    const dx = e.clientX - d.startX;
+    const dy = e.clientY - d.startY;
+    if (!d.moved && Math.hypot(dx, dy) < 4) return;
+    d.moved = true;
+    const nx = d.baseX + dx;
+    const ny = d.baseY + dy;
+    setSatellitePositions((prev) => {
+      const arr = [...(prev[d.pkg] ?? [
+        { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 },
+      ])];
+      arr[d.index] = { x: nx, y: ny };
+      return { ...prev, [d.pkg]: arr };
+    });
+  };
+
+  const handlePointerUp = (
+    e: React.PointerEvent<HTMLDivElement>,
+    pkgTitle: string,
+    index: number,
+  ) => {
+    const d = dragRef.current;
+    try {
+      (e.currentTarget as HTMLDivElement).releasePointerCapture(e.pointerId);
+    } catch {
+      /* ignore */
+    }
+    dragRef.current = null;
+    if (!d || !d.moved) {
+      // Treat as click → open picker
+      openPicker(pkgTitle, index);
+    }
   };
 
   return (
