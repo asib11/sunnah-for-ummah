@@ -74,6 +74,9 @@ const packages: Package[] = [
 ];
 
 const STORAGE_KEY = "sfu:hajj-satellites";
+const POS_STORAGE_KEY = "sfu:hajj-satellite-positions";
+
+type Offset = { x: number; y: number };
 
 const HajjPackages = () => {
   // Per-package satellite overrides: { [pkgTitle]: (string|null)[5] }
@@ -86,8 +89,29 @@ const HajjPackages = () => {
       return {};
     }
   });
+
+  // Drag offsets (px) per { [pkgTitle]: Offset[5] }
+  const [satellitePositions, setSatellitePositions] = useState<Record<string, Offset[]>>(() => {
+    if (typeof window === "undefined") return {};
+    try {
+      const raw = window.localStorage.getItem(POS_STORAGE_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch {
+      return {};
+    }
+  });
+
   const [editing, setEditing] = useState<{ pkg: string; index: number } | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const dragRef = useRef<{
+    pkg: string;
+    index: number;
+    startX: number;
+    startY: number;
+    baseX: number;
+    baseY: number;
+    moved: boolean;
+  } | null>(null);
 
   useEffect(() => {
     try {
@@ -97,12 +121,22 @@ const HajjPackages = () => {
     }
   }, [satelliteOverrides]);
 
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(POS_STORAGE_KEY, JSON.stringify(satellitePositions));
+    } catch {
+      /* ignore */
+    }
+  }, [satellitePositions]);
+
   const getSatellite = (pkg: Package, i: number): string | undefined =>
     satelliteOverrides[pkg.title]?.[i] ?? pkg.satellites?.[i];
 
+  const getOffset = (pkgTitle: string, i: number): Offset =>
+    satellitePositions[pkgTitle]?.[i] ?? { x: 0, y: 0 };
+
   const openPicker = (pkgTitle: string, index: number) => {
     setEditing({ pkg: pkgTitle, index });
-    // open after state set
     setTimeout(() => fileInputRef.current?.click(), 0);
   };
 
@@ -129,6 +163,60 @@ const HajjPackages = () => {
       arr[i] = null;
       return { ...prev, [pkgTitle]: arr };
     });
+  };
+
+  const handlePointerDown = (
+    e: React.PointerEvent<HTMLDivElement>,
+    pkgTitle: string,
+    index: number,
+  ) => {
+    const base = getOffset(pkgTitle, index);
+    dragRef.current = {
+      pkg: pkgTitle,
+      index,
+      startX: e.clientX,
+      startY: e.clientY,
+      baseX: base.x,
+      baseY: base.y,
+      moved: false,
+    };
+    (e.currentTarget as HTMLDivElement).setPointerCapture(e.pointerId);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    const d = dragRef.current;
+    if (!d) return;
+    const dx = e.clientX - d.startX;
+    const dy = e.clientY - d.startY;
+    if (!d.moved && Math.hypot(dx, dy) < 4) return;
+    d.moved = true;
+    const nx = d.baseX + dx;
+    const ny = d.baseY + dy;
+    setSatellitePositions((prev) => {
+      const arr = [...(prev[d.pkg] ?? [
+        { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 }, { x: 0, y: 0 },
+      ])];
+      arr[d.index] = { x: nx, y: ny };
+      return { ...prev, [d.pkg]: arr };
+    });
+  };
+
+  const handlePointerUp = (
+    e: React.PointerEvent<HTMLDivElement>,
+    pkgTitle: string,
+    index: number,
+  ) => {
+    const d = dragRef.current;
+    try {
+      (e.currentTarget as HTMLDivElement).releasePointerCapture(e.pointerId);
+    } catch {
+      /* ignore */
+    }
+    dragRef.current = null;
+    if (!d || !d.moved) {
+      // Treat as click → open picker
+      openPicker(pkgTitle, index);
+    }
   };
 
   return (
@@ -331,24 +419,41 @@ const HajjPackages = () => {
                       ];
                       return bubbles.map((b, i) => {
                         const img = getSatellite(pkg, i);
+                        const offset = getOffset(pkg.title, i);
+                        const dragged = offset.x !== 0 || offset.y !== 0;
                         return (
                           <div
                             key={`bubble-${i}`}
-                            className={`group/bubble absolute ${b.pos} ${b.size} z-20`}
-                            style={{ animation: `amoeba-float ${b.dur} ease-in-out infinite ${b.delay}` }}
+                            className={`group/bubble absolute ${b.pos} ${b.size} z-20 touch-none select-none`}
+                            style={{
+                              transform: `translate(${offset.x}px, ${offset.y}px)`,
+                              animation: dragged
+                                ? "none"
+                                : `amoeba-float ${b.dur} ease-in-out infinite ${b.delay}`,
+                            }}
+                            onPointerDown={(e) => handlePointerDown(e, pkg.title, i)}
+                            onPointerMove={handlePointerMove}
+                            onPointerUp={(e) => handlePointerUp(e, pkg.title, i)}
+                            onPointerCancel={(e) => {
+                              try {
+                                (e.currentTarget as HTMLDivElement).releasePointerCapture(e.pointerId);
+                              } catch { /* ignore */ }
+                              dragRef.current = null;
+                            }}
                           >
-                            <button
-                              type="button"
-                              onClick={() => openPicker(pkg.title, i)}
-                              aria-label={`Upload product image ${i + 1} for ${pkg.title}`}
-                              className={`relative block w-full h-full rounded-full p-[2px] bg-gradient-to-br ${b.ring} shadow-lg overflow-hidden cursor-pointer hover:scale-110 transition-transform focus:outline-none focus:ring-2 focus:ring-accent`}
+                            <div
+                              role="button"
+                              tabIndex={0}
+                              aria-label={`Drag to move or click to upload product image ${i + 1} for ${pkg.title}`}
+                              className={`relative block w-full h-full rounded-full p-[2px] bg-gradient-to-br ${b.ring} shadow-lg overflow-hidden cursor-grab active:cursor-grabbing hover:scale-110 transition-transform focus:outline-none focus:ring-2 focus:ring-accent`}
                             >
-                              <span className="flex w-full h-full rounded-full overflow-hidden bg-background items-center justify-center">
+                              <span className="flex w-full h-full rounded-full overflow-hidden bg-background items-center justify-center pointer-events-none">
                                 {img ? (
                                   <img
                                     src={img}
                                     alt={`${pkg.title} highlight ${i + 1}`}
                                     loading="lazy"
+                                    draggable={false}
                                     className="w-full h-full object-cover"
                                   />
                                 ) : (
@@ -356,10 +461,10 @@ const HajjPackages = () => {
                                 )}
                               </span>
                               {/* Hover upload overlay */}
-                              <span className="absolute inset-[2px] rounded-full bg-black/55 opacity-0 group-hover/bubble:opacity-100 transition-opacity flex items-center justify-center">
+                              <span className="pointer-events-none absolute inset-[2px] rounded-full bg-black/55 opacity-0 group-hover/bubble:opacity-100 transition-opacity flex items-center justify-center">
                                 <Upload className="w-1/3 h-1/3 text-white" />
                               </span>
-                            </button>
+                            </div>
                             {img && (
                               <button
                                 type="button"
