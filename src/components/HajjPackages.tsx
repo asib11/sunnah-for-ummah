@@ -1,5 +1,6 @@
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Check, Star, CheckCircle2 } from "lucide-react";
+import { Check, Star, CheckCircle2, Upload, X } from "lucide-react";
 import HajjKitDetails from "./HajjKitDetails";
 import hajjHeroBg from "@/assets/hajj-hero-bg.jpg";
 import pkgHajjCombo from "@/assets/pkg-hajj-combo.jpg";
@@ -72,7 +73,64 @@ const packages: Package[] = [
   },
 ];
 
+const STORAGE_KEY = "sfu:hajj-satellites";
+
 const HajjPackages = () => {
+  // Per-package satellite overrides: { [pkgTitle]: (string|null)[5] }
+  const [satelliteOverrides, setSatelliteOverrides] = useState<Record<string, (string | null)[]>>(() => {
+    if (typeof window === "undefined") return {};
+    try {
+      const raw = window.localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch {
+      return {};
+    }
+  });
+  const [editing, setEditing] = useState<{ pkg: string; index: number } | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(satelliteOverrides));
+    } catch {
+      /* ignore quota errors */
+    }
+  }, [satelliteOverrides]);
+
+  const getSatellite = (pkg: Package, i: number): string | undefined =>
+    satelliteOverrides[pkg.title]?.[i] ?? pkg.satellites?.[i];
+
+  const openPicker = (pkgTitle: string, index: number) => {
+    setEditing({ pkg: pkgTitle, index });
+    // open after state set
+    setTimeout(() => fileInputRef.current?.click(), 0);
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = "";
+    if (!file || !editing) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const dataUrl = reader.result as string;
+      setSatelliteOverrides((prev) => {
+        const arr = [...(prev[editing.pkg] ?? [null, null, null, null, null])];
+        arr[editing.index] = dataUrl;
+        return { ...prev, [editing.pkg]: arr };
+      });
+      setEditing(null);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const clearSatellite = (pkgTitle: string, i: number) => {
+    setSatelliteOverrides((prev) => {
+      const arr = [...(prev[pkgTitle] ?? [null, null, null, null, null])];
+      arr[i] = null;
+      return { ...prev, [pkgTitle]: arr };
+    });
+  };
+
   return (
     <section className="relative">
       {/* Hero banner */}
@@ -272,26 +330,50 @@ const HajjPackages = () => {
                         { pos: "-top-4 left-1/3", size: "w-11 h-11", ring: "from-accent to-amber-500", delay: "0.8s", dur: "4.2s" },
                       ];
                       return bubbles.map((b, i) => {
-                        const img = pkg.satellites?.[i];
+                        const img = getSatellite(pkg, i);
                         return (
-                          <span
+                          <div
                             key={`bubble-${i}`}
-                            className={`absolute ${b.pos} ${b.size} rounded-full p-[2px] bg-gradient-to-br ${b.ring} shadow-lg overflow-hidden`}
+                            className={`group/bubble absolute ${b.pos} ${b.size} z-20`}
                             style={{ animation: `amoeba-float ${b.dur} ease-in-out infinite ${b.delay}` }}
                           >
-                            <span className="block w-full h-full rounded-full overflow-hidden bg-background flex items-center justify-center">
-                              {img ? (
-                                <img
-                                  src={img}
-                                  alt={`${pkg.title} highlight ${i + 1}`}
-                                  loading="lazy"
-                                  className="w-full h-full object-cover"
-                                />
-                              ) : (
-                                <Star className="w-1/2 h-1/2 fill-accent text-accent" />
-                              )}
-                            </span>
-                          </span>
+                            <button
+                              type="button"
+                              onClick={() => openPicker(pkg.title, i)}
+                              aria-label={`Upload product image ${i + 1} for ${pkg.title}`}
+                              className={`relative block w-full h-full rounded-full p-[2px] bg-gradient-to-br ${b.ring} shadow-lg overflow-hidden cursor-pointer hover:scale-110 transition-transform focus:outline-none focus:ring-2 focus:ring-accent`}
+                            >
+                              <span className="flex w-full h-full rounded-full overflow-hidden bg-background items-center justify-center">
+                                {img ? (
+                                  <img
+                                    src={img}
+                                    alt={`${pkg.title} highlight ${i + 1}`}
+                                    loading="lazy"
+                                    className="w-full h-full object-cover"
+                                  />
+                                ) : (
+                                  <Star className="w-1/2 h-1/2 fill-accent text-accent" />
+                                )}
+                              </span>
+                              {/* Hover upload overlay */}
+                              <span className="absolute inset-[2px] rounded-full bg-black/55 opacity-0 group-hover/bubble:opacity-100 transition-opacity flex items-center justify-center">
+                                <Upload className="w-1/3 h-1/3 text-white" />
+                              </span>
+                            </button>
+                            {img && (
+                              <button
+                                type="button"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  clearSatellite(pkg.title, i);
+                                }}
+                                aria-label="Remove image"
+                                className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-destructive text-destructive-foreground shadow opacity-0 group-hover/bubble:opacity-100 transition-opacity flex items-center justify-center"
+                              >
+                                <X className="w-3 h-3" />
+                              </button>
+                            )}
+                          </div>
                         );
                       });
                     })()}
@@ -335,6 +417,14 @@ const HajjPackages = () => {
           </div>
         </div>
       </div>
+      {/* Hidden file picker shared by all satellite bubbles */}
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={handleFileChange}
+      />
     </section>
   );
 };
