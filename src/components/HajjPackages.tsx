@@ -417,6 +417,14 @@ const HajjPackages = () => {
           </div>
         </div>
       </div>
+      {/* Hidden file picker shared by all satellite bubbles */}
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={handleFileChange}
+      />
     </section>
   );
 };
