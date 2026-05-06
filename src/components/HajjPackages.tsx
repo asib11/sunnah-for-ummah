@@ -1,5 +1,6 @@
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Check, Star, CheckCircle2 } from "lucide-react";
+import { Check, Star, CheckCircle2, Upload, X } from "lucide-react";
 import HajjKitDetails from "./HajjKitDetails";
 import hajjHeroBg from "@/assets/hajj-hero-bg.jpg";
 import pkgHajjCombo from "@/assets/pkg-hajj-combo.jpg";
