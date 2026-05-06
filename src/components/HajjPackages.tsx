@@ -330,26 +330,50 @@ const HajjPackages = () => {
                         { pos: "-top-4 left-1/3", size: "w-11 h-11", ring: "from-accent to-amber-500", delay: "0.8s", dur: "4.2s" },
                       ];
                       return bubbles.map((b, i) => {
-                        const img = pkg.satellites?.[i];
+                        const img = getSatellite(pkg, i);
                         return (
-                          <span
+                          <div
                             key={`bubble-${i}`}
-                            className={`absolute ${b.pos} ${b.size} rounded-full p-[2px] bg-gradient-to-br ${b.ring} shadow-lg overflow-hidden`}
+                            className={`group/bubble absolute ${b.pos} ${b.size} z-20`}
                             style={{ animation: `amoeba-float ${b.dur} ease-in-out infinite ${b.delay}` }}
                           >
-                            <span className="block w-full h-full rounded-full overflow-hidden bg-background flex items-center justify-center">
-                              {img ? (
-                                <img
-                                  src={img}
-                                  alt={`${pkg.title} highlight ${i + 1}`}
-                                  loading="lazy"
-                                  className="w-full h-full object-cover"
-                                />
-                              ) : (
-                                <Star className="w-1/2 h-1/2 fill-accent text-accent" />
-                              )}
-                            </span>
-                          </span>
+                            <button
+                              type="button"
+                              onClick={() => openPicker(pkg.title, i)}
+                              aria-label={`Upload product image ${i + 1} for ${pkg.title}`}
+                              className={`relative block w-full h-full rounded-full p-[2px] bg-gradient-to-br ${b.ring} shadow-lg overflow-hidden cursor-pointer hover:scale-110 transition-transform focus:outline-none focus:ring-2 focus:ring-accent`}
+                            >
+                              <span className="flex w-full h-full rounded-full overflow-hidden bg-background items-center justify-center">
+                                {img ? (
+                                  <img
+                                    src={img}
+                                    alt={`${pkg.title} highlight ${i + 1}`}
+                                    loading="lazy"
+                                    className="w-full h-full object-cover"
+                                  />
+                                ) : (
+                                  <Star className="w-1/2 h-1/2 fill-accent text-accent" />
+                                )}
+                              </span>
+                              {/* Hover upload overlay */}
+                              <span className="absolute inset-[2px] rounded-full bg-black/55 opacity-0 group-hover/bubble:opacity-100 transition-opacity flex items-center justify-center">
+                                <Upload className="w-1/3 h-1/3 text-white" />
+                              </span>
+                            </button>
+                            {img && (
+                              <button
+                                type="button"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  clearSatellite(pkg.title, i);
+                                }}
+                                aria-label="Remove image"
+                                className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-destructive text-destructive-foreground shadow opacity-0 group-hover/bubble:opacity-100 transition-opacity flex items-center justify-center"
+                              >
+                                <X className="w-3 h-3" />
+                              </button>
+                            )}
+                          </div>
                         );
                       });
                     })()}
