@@ -419,24 +419,41 @@ const HajjPackages = () => {
                       ];
                       return bubbles.map((b, i) => {
                         const img = getSatellite(pkg, i);
+                        const offset = getOffset(pkg.title, i);
+                        const dragged = offset.x !== 0 || offset.y !== 0;
                         return (
                           <div
                             key={`bubble-${i}`}
-                            className={`group/bubble absolute ${b.pos} ${b.size} z-20`}
-                            style={{ animation: `amoeba-float ${b.dur} ease-in-out infinite ${b.delay}` }}
+                            className={`group/bubble absolute ${b.pos} ${b.size} z-20 touch-none select-none`}
+                            style={{
+                              transform: `translate(${offset.x}px, ${offset.y}px)`,
+                              animation: dragged
+                                ? "none"
+                                : `amoeba-float ${b.dur} ease-in-out infinite ${b.delay}`,
+                            }}
+                            onPointerDown={(e) => handlePointerDown(e, pkg.title, i)}
+                            onPointerMove={handlePointerMove}
+                            onPointerUp={(e) => handlePointerUp(e, pkg.title, i)}
+                            onPointerCancel={(e) => {
+                              try {
+                                (e.currentTarget as HTMLDivElement).releasePointerCapture(e.pointerId);
+                              } catch { /* ignore */ }
+                              dragRef.current = null;
+                            }}
                           >
-                            <button
-                              type="button"
-                              onClick={() => openPicker(pkg.title, i)}
-                              aria-label={`Upload product image ${i + 1} for ${pkg.title}`}
-                              className={`relative block w-full h-full rounded-full p-[2px] bg-gradient-to-br ${b.ring} shadow-lg overflow-hidden cursor-pointer hover:scale-110 transition-transform focus:outline-none focus:ring-2 focus:ring-accent`}
+                            <div
+                              role="button"
+                              tabIndex={0}
+                              aria-label={`Drag to move or click to upload product image ${i + 1} for ${pkg.title}`}
+                              className={`relative block w-full h-full rounded-full p-[2px] bg-gradient-to-br ${b.ring} shadow-lg overflow-hidden cursor-grab active:cursor-grabbing hover:scale-110 transition-transform focus:outline-none focus:ring-2 focus:ring-accent`}
                             >
-                              <span className="flex w-full h-full rounded-full overflow-hidden bg-background items-center justify-center">
+                              <span className="flex w-full h-full rounded-full overflow-hidden bg-background items-center justify-center pointer-events-none">
                                 {img ? (
                                   <img
                                     src={img}
                                     alt={`${pkg.title} highlight ${i + 1}`}
                                     loading="lazy"
+                                    draggable={false}
                                     className="w-full h-full object-cover"
                                   />
                                 ) : (
@@ -444,10 +461,10 @@ const HajjPackages = () => {
                                 )}
                               </span>
                               {/* Hover upload overlay */}
-                              <span className="absolute inset-[2px] rounded-full bg-black/55 opacity-0 group-hover/bubble:opacity-100 transition-opacity flex items-center justify-center">
+                              <span className="pointer-events-none absolute inset-[2px] rounded-full bg-black/55 opacity-0 group-hover/bubble:opacity-100 transition-opacity flex items-center justify-center">
                                 <Upload className="w-1/3 h-1/3 text-white" />
                               </span>
-                            </button>
+                            </div>
                             {img && (
                               <button
                                 type="button"
