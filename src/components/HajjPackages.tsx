@@ -259,9 +259,21 @@ const HajjPackages = () => {
                       <span className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-primary/0 via-primary/0 to-primary/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
 
-                    {/* Floating accent badge — top right */}
+                    {/* Floating star badges around the blob */}
                     <span className="pointer-events-none absolute -top-1 -right-1 w-8 h-8 rounded-full bg-gradient-to-br from-accent to-amber-400 shadow-lg flex items-center justify-center [animation:amoeba-float_4s_ease-in-out_infinite]">
                       <Star className="w-4 h-4 fill-white text-white" />
+                    </span>
+                    <span className="pointer-events-none absolute top-1/4 -left-3 w-7 h-7 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 shadow-lg flex items-center justify-center [animation:amoeba-float_5s_ease-in-out_infinite_0.5s]">
+                      <Star className="w-3.5 h-3.5 fill-white text-white" />
+                    </span>
+                    <span className="pointer-events-none absolute -bottom-2 left-1/4 w-6 h-6 rounded-full bg-gradient-to-br from-amber-300 to-accent shadow-md flex items-center justify-center [animation:amoeba-float_4.5s_ease-in-out_infinite_1s]">
+                      <Star className="w-3 h-3 fill-white text-white" />
+                    </span>
+                    <span className="pointer-events-none absolute bottom-1/4 -right-3 w-7 h-7 rounded-full bg-gradient-to-br from-lime-300 to-emerald-500 shadow-lg flex items-center justify-center [animation:amoeba-float_5.5s_ease-in-out_infinite_1.5s]">
+                      <Star className="w-3.5 h-3.5 fill-white text-white" />
+                    </span>
+                    <span className="pointer-events-none absolute -top-2 left-1/3 w-6 h-6 rounded-full bg-gradient-to-br from-accent to-amber-500 shadow-md flex items-center justify-center [animation:amoeba-float_4.2s_ease-in-out_infinite_0.8s]">
+                      <Star className="w-3 h-3 fill-white text-white" />
                     </span>
                   </div>
 
